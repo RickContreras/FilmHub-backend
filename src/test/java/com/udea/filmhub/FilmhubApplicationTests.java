@@ -1,10 +1,10 @@
-package com.udea.audiovisuales;
+package com.udea.filmhub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AudioVisualesApplicationTests {
+class FilmhubApplicationTests {
 
 	@Test
 	void contextLoads() {
