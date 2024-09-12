@@ -1,8 +1,19 @@
-# 📽️ Proyecto de Aplicación de Contenido Audiovisual
+# 📽️ Filmhub - Backend
+
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.3-brightgreen)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.7.3-blue)
+![Maven](https://img.shields.io/badge/Maven-3.8.4-red)
 
 Este proyecto es una aplicación **REST API** creada con **Spring Boot** que permite gestionar contenido audiovisual (películas, series, recomendaciones, usuarios, etc.) usando una base de datos **Azure SQL**.
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Descripción
+
+Filmhub es una aplicación que permite a los usuarios gestionar y visualizar contenido audiovisual. Los usuarios pueden registrarse, agregar contenido a su lista y marcar contenido como visto o no visto.
+
+
+
+## 🛠️ Tecnologías Utilizadas
 
 - **Spring Boot**: Framework para desarrollar aplicaciones Java de manera rápida.
 - **Spring Data JPA**: Módulo para interactuar con bases de datos relacionales usando JPA/Hibernate.
@@ -21,13 +32,17 @@ src/
 │   │   └── com/
 │   │       └── udea/
 │   │           └── filmhub/  # Paquete base
-│   │               ├── controller/   # Controladores REST
+│   │               ├── controller/
+│   │               ├── exceptions/  
 │   │               ├── model/        # Entidades JPA (tablas)
 │   │               ├── repository/   # Repositorios JPA
-│   │               └── service/      # Servicios (lógica de negocio)
+│   │               ├── service/      # Servicios (lógica de negocio)
+│   │               └── FilmhubApplication.java      
 │   └── resources/
 │       ├── static/                   # Archivos estáticos (si es necesario)
 │       ├── templates/                # Plantillas Thymeleaf (si usas vistas)
+│       ├── application-dev.properties 
+│       ├── application-pdn.properties
 │       └── application.properties    # Configuración de la base de datos y otros
 └── test/                             # Pruebas unitarias e integración
 ```
@@ -117,33 +132,51 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2012Diale
 1. Reemplaza `<nombre-servidor>`, `<nombre-base-datos>`, `<tu-usuario>` y `<tu-contraseña>` con los valores correctos de tu base de datos en Azure.
 2. Asegúrate de que tu firewall en Azure esté configurado para permitir conexiones desde tu máquina local o servicio donde esté desplegada la aplicación.
 
-## ▶️ Cómo Ejecutar el Proyecto
+## ⚙️ Configuración del Entorno
 
-1. **Clona el proyecto**:
+1. **Clonar el repositorio:**
 
-   ```bash
-   git clone https://github.com/RickContreras/FilmHub-backend.git
-   cd FilmHub-backend
-   ```
+    ```bash
+    git clone https://github.com/RickContreras/FilmHub-backend.git
+    cd FilmHub-backend
+    ```
 
-2. **Configura las propiedades** en el archivo `application.properties` para apuntar a tu base de datos en Azure SQL.
+2. **Configurar la base de datos:**
 
-3. **Construye y ejecuta el proyecto**:
+   Asegúrate de tener PostgreSQL instalado y ejecutándose. Luego, crea una base de datos llamada `filmhub`.
 
-   Si usas **Maven**, puedes compilar el proyecto y ejecutarlo con:
+    ```sql
+    CREATE DATABASE filmhub;
+    ```
 
-   ```bash
-   mvn clean install
-   mvn spring-boot:run
-   ```
+3. **Configurar las propiedades de la aplicación:**
 
-4. **Prueba la API**: Puedes usar **Postman** o **cURL** para interactuar con los endpoints de la API.
+   Edita el archivo `src/main/resources/application-dev.properties` con las credenciales de tu base de datos:
+
+    ```ini
+    spring.datasource.url=jdbc:postgresql://localhost:5432/filmhub
+    spring.datasource.username=tu_usuario
+    spring.datasource.password=tu_contraseña
+    ```
+
+4. **Construir y ejecutar la aplicación:**
+
+    ```bash
+    mvn clean install
+    mvn spring-boot:run
+    ```
+
+   La aplicación estará disponible en `http://localhost:8090`.
+ 
+
+5. **Prueba la API**: Puedes usar **Postman** o **cURL** para interactuar con los endpoints de la API.
 
    Ejemplo para obtener todos los usuarios:
 
    ```bash
-   GET http://localhost:8080/api/usuarios
+   GET http://localhost:8090/api/usuarios
    ```
+
 
 ## 🧪 Pruebas
 
@@ -153,19 +186,23 @@ Las pruebas unitarias y de integración pueden ser ejecutadas desde la carpeta `
 mvn test
 ```
 
-## 📌 Características
+## 📡 Endpoints
 
-[En construcción]
+- **GET /contenidos**: Obtiene todos los contenidos.
+- **GET /contenidos/{id}**: Obtiene un contenido por ID.
+- **GET /usuarios/{id}/contenidos**: Obtiene los contenidos asociados a un usuario.
 
-Ejemplo:
-- **Gestión de usuarios**: Crear, actualizar y listar usuarios.
-- **Contenido Audiovisual**: Gestión de películas, series y su clasificación.
-- **Recomendaciones**: Los usuarios pueden recomendar contenido.
-- **Comentarios**: Permite agregar y listar comentarios sobre contenido.
+## 🤝 Contribuir
+
+1. **Fork el repositorio**
+2. **Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`)**
+3. **Haz commit de tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)**
+4. **Haz push a la rama (`git push origin feature/nueva-funcionalidad`)**
+5. **Abre un Pull Request**
 
 ## 🔒 Seguridad
 
-Este proyecto aún no incluye seguridad, pero podrías integrarlo fácilmente con **Spring Security** para proteger ciertos endpoints con autenticación y autorización.
+Este proyecto aún no incluye seguridad, pero se podría integrar fácilmente con **Spring Security** para proteger ciertos endpoints con autenticación y autorización.
 
 
 
