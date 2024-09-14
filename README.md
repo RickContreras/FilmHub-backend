@@ -3,7 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.3-brightgreen)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.7.3-blue)
-![Maven](https://img.shields.io/badge/Maven-3.8.4-red)
+![Maven](https://img.shields.io/badge/Maven-3.9.9-red)
 
 Este proyecto es una aplicación **REST API** creada con **Spring Boot** que permite gestionar contenido audiovisual (películas, series, recomendaciones, usuarios, etc.) usando una base de datos **Azure SQL**.
 
