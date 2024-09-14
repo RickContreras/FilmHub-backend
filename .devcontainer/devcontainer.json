@@ -1,0 +1,23 @@
+{
+    "name": "Filmhub Backend",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "appPort": [8090],
+    "postCreateCommand": "mvn clean install",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            },
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "pivotal.vscode-spring-boot",
+                "redhat.vscode-yaml",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode-remote.remote-containers"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}
