@@ -1,20 +1,11 @@
-# Usar una imagen base de Java
-FROM mcr.microsoft.com/vscode/devcontainers/java:0-21
+FROM mcr.microsoft.com/devcontainers/java:21
 
-# Instalar Maven
-RUN apt-get update && apt-get install -y maven
+# Maven ya está incluido en la imagen base, no necesitamos instalarlo
 
-# Instalar PostgreSQL
-RUN apt-get update && apt-get install -y postgresql postgresql-contrib
 
-# Configurar PostgreSQL
-USER postgres
-RUN /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER dev WITH SUPERUSER PASSWORD 'dev';" &&\
-    createdb -O dev filmhub
+# Copiar el proyecto
+WORKDIR /workspace
+COPY . .
 
 # Exponer el puerto de la aplicación
 EXPOSE 8090
-
-# Establecer el usuario de vuelta a vscode
-USER vscode
