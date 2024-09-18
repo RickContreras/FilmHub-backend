@@ -1,34 +1,68 @@
 {
-    "name": "FilmHub Spring Boot",
-    "dockerFile": "Dockerfile",
-    "forwardPorts": [8090],
+    "name": "spring-boot-app-service-postgresql-redis-infra",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "features": {
+        "ghcr.io/azure/azure-dev/azd:latest": {}
+    },
     "customizations": {
         "vscode": {
             "extensions": [
+                "ms-azuretools.azure-dev",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "mtxr.sqltools",
+                "mtxr.sqltools-driver-pg",
                 "vscjava.vscode-java-pack",
-                "pivotal.vscode-spring-boot",
-                "redhat.vscode-xml",
+                "vscjava.vscode-spring-initializr",
                 "vscjava.vscode-spring-boot-dashboard",
+                "vscjava.vscode-spring-boot",
                 "github.copilot",
-                "github.copilot-chat",
-                "ms-mssql.mssql"
-            ]
+                "github.copilot-chat"
+            ],
+            "settings": {
+                "sqltools.connections": [
+                    {
+                        "name": "Container database",
+                        "driver": "PostgreSQL",
+                        "previewLimit": 50,
+                        "server": "localhost",
+                        "port": 5432,
+                        "database": "filmhub",
+                        "username": "postgres",
+						"password": "root1"
+                    }
+                ],
+                "python.pythonPath": "/usr/local/bin/python",
+                "python.languageServer": "Pylance",
+                "python.linting.enabled": true,
+                "python.linting.mypyEnabled": true,
+                "python.testing.pytestEnabled": true,
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": [
+                    "--line-length=80"
+                ],
+                "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+                "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+                "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+                "python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+                "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+                "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+                "python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+                "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+                "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+                "python.testing.pytestPath": "/usr/local/py-utils/bin/pytest",
+                "java.jdt.ls.java.home": "/docker-java-home",
+                "java.configuration.updateBuildConfiguration": "automatic",
+                "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                "java.format.settings.profile": "GoogleStyle",
+                "java.compile.nullAnalysis.mode": "automatic"
+            }
         }
     },
-    "postCreateCommand": "mvn clean install",
-    "remoteUser": "vscode",
-    "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "21",
-            "installMaven": "true",
-            "mavenVersion": "3.9.9"
-        },
-        "ghcr.io/devcontainers/features/azure-cli:1": {},
-        "ghcr.io/devcontainers/features/postgresql:1": {}
-    },
-    "hostRequirements": {
-      "cpus": 4,
-      "memory": "8gb",
-      "storage": "32gb"
-    }
+    "forwardPorts": [
+        8000, 5000, 5432, 8080
+    ],
+    "remoteUser": "vscode"
 }

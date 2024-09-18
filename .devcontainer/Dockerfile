@@ -1,11 +1,5 @@
-FROM mcr.microsoft.com/devcontainers/java:21
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-3.10
 
-# Maven ya está incluido en la imagen base, no necesitamos instalarlo
-
-
-# Copiar el proyecto
-WORKDIR /workspace
-COPY . .
-
-# Exponer el puerto de la aplicación
-EXPOSE 8090
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends postgresql-client \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
