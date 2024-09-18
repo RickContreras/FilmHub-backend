@@ -11,8 +11,6 @@ Este proyecto es una aplicación **REST API** creada con **Spring Boot** que per
 
 Filmhub es una aplicación que permite a los usuarios gestionar y visualizar contenido audiovisual. Los usuarios pueden registrarse, agregar contenido a su lista y marcar contenido como visto o no visto.
 
-
-
 ## 🛠️ Tecnologías Utilizadas
 
 - **Spring Boot**: Framework para desarrollar aplicaciones Java de manera rápida.
@@ -161,20 +159,30 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2012Diale
 
 4. **Construir y ejecutar la aplicación:**
 
+    Haz clic en el siguiente botón para abrir este proyecto en GitHub Codespaces:
+
+    [![Abrir en Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=RickContreras/filmhub-backend)
+
     ```bash
     mvn clean install
     mvn spring-boot:run
     ```
 
-   La aplicación estará disponible en `http://localhost:8090`.
+   La aplicación estará disponible en `http://localhost:8080`.
  
 
 5. **Prueba la API**: Puedes usar **Postman** o **cURL** para interactuar con los endpoints de la API.
 
+   Ejemplo para recibir un saludo:
+
+   ```bash
+   GET http://localhost:8080/api/saludar
+   ```
+
    Ejemplo para obtener todos los usuarios:
 
    ```bash
-   GET http://localhost:8090/api/usuarios
+   GET http://localhost:8080/api/usuarios
    ```
 
 
