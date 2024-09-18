@@ -1,5 +1,5 @@
 {
-    "name": "spring-boot-app-service-postgresql-redis-infra",
+    "name": "spring-boot-app-service-postgresql-infra",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
@@ -31,28 +31,9 @@
                         "port": 5432,
                         "database": "filmhub",
                         "username": "postgres",
-						"password": "root1"
+                        "password": "root1"
                     }
                 ],
-                "python.pythonPath": "/usr/local/bin/python",
-                "python.languageServer": "Pylance",
-                "python.linting.enabled": true,
-                "python.linting.mypyEnabled": true,
-                "python.testing.pytestEnabled": true,
-                "python.formatting.provider": "black",
-                "python.formatting.blackArgs": [
-                    "--line-length=80"
-                ],
-                "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
-                "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
-                "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-                "python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
-                "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
-                "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-                "python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
-                "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-                "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
-                "python.testing.pytestPath": "/usr/local/py-utils/bin/pytest",
                 "java.jdt.ls.java.home": "/docker-java-home",
                 "java.configuration.updateBuildConfiguration": "automatic",
                 "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
@@ -62,7 +43,7 @@
         }
     },
     "forwardPorts": [
-        8000, 5000, 5432, 8080
+        8090, 5432
     ],
     "remoteUser": "vscode"
 }
