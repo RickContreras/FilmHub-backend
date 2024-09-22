@@ -170,3 +170,9 @@ build/
 
 .idea/*
 /.idea/*
+
+# Intellij
+
+*.iml
+env.sh
+/.azure
