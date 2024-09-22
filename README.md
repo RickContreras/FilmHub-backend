@@ -2,215 +2,240 @@
 
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.3-brightgreen)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-3.2.5-brightgreen)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.7.3-blue)
 ![Maven](https://img.shields.io/badge/Maven-3.9.9-red)
+![Codespaces](https://img.shields.io/badge/Codespaces-Enabled-blue?logo=github)
+![Azure](https://img.shields.io/badge/Azure-Enabled-blue?logo=microsoft-azure)
+![Azure SQL Database](https://img.shields.io/badge/Azure%20SQL%20Database-Enabled-blue?logo=microsoft-azure)
 
-Este proyecto es una aplicación **REST API** creada con **Spring Boot** que permite gestionar contenido audiovisual (películas, series, recomendaciones, usuarios, etc.) usando una base de datos **Azure SQL**.
+Una aplicación **REST API** robusta creada con **Spring Boot** para gestionar contenido audiovisual, utilizando **Azure SQL Database** o **PostgreSQL**.
+
+## 📑 Tabla de Contenidos
+
+- [🚀 Descripción](#-descripción)
+- [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+- [📂 Estructura del Proyecto](#-estructura-del-proyecto)
+- [📦 Dependencias Principales](#-dependencias-principales)
+- [🔧 Configuración de Entorno](#-configuración-de-entorno)
+  - [Azure SQL Database](#azure-sql-database)
+  - [PostgreSQL](#postgresql)
+- [🏗️ Creación de la Infraestructura](#️-creación-de-la-infraestructura)
+- [💥 Destrucción de la Infraestructura](#-destrucción-de-la-infraestructura)
+- [🚀 Compilación y Ejecución del Proyecto](#-compilación-y-ejecución-del-proyecto)
+- [🧪 Pruebas](#-pruebas)
+- [📡 Endpoints](#-endpoints)
+- [🤝 Contribuir](#-contribuir)
+- [🔒 Seguridad](#-seguridad)
+- [📄 Licencia](#-licencia)
 
 ## 🚀 Descripción
 
-Filmhub es una aplicación que permite a los usuarios gestionar y visualizar contenido audiovisual. Los usuarios pueden registrarse, agregar contenido a su lista y marcar contenido como visto o no visto.
+Filmhub es una aplicación backend diseñada para ofrecer una experiencia completa en la gestión de contenido audiovisual. Permite a los usuarios:
+
+- Registrarse y gestionar sus perfiles
+- Explorar un catálogo extenso de películas y series
+- Agregar contenido a listas personalizadas
+- Marcar contenido como visto o no visto
+- Recibir recomendaciones personalizadas basadas en sus preferencias
+
+Esta API RESTful proporciona la base para construir aplicaciones frontend robustas y escalables en el dominio del streaming y la gestión de contenido multimedia.
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Spring Boot**: Framework para desarrollar aplicaciones Java de manera rápida.
-- **Spring Data JPA**: Módulo para interactuar con bases de datos relacionales usando JPA/Hibernate.
-- **Azure SQL Database**: Base de datos en la nube proporcionada por Microsoft Azure.
-- **Maven**: Sistema de gestión de dependencias y construcción de proyectos.
-- **Postman**: Para probar las API expuestas.
+- **Spring Boot**: Framework Java para desarrollo rápido de aplicaciones con configuración mínima.
+- **Spring Data JPA**: Simplifica el acceso a datos utilizando el estándar JPA con Hibernate.
+- **Azure SQL Database**: Base de datos relacional en la nube, totalmente administrada y con alta disponibilidad.
+- **PostgreSQL**: Sistema de gestión de bases de datos relacional de código abierto.
+- **Maven**: Herramienta de gestión y construcción de proyectos Java.
+- **Postman**: Plataforma de colaboración para el desarrollo de API.
+- **GitHub Codespaces**: Entorno de desarrollo en la nube integrado con GitHub.
+- **Azure CLI**: Interfaz de línea de comandos para gestionar recursos de Azure.
 
 ## 📂 Estructura del Proyecto
 
 La estructura del proyecto sigue las mejores prácticas de Spring Boot, dividiendo la lógica en capas como controladores, modelos, repositorios, y más.
 
-```bash
+```
 src/
 ├── main/
 │   ├── java/
 │   │   └── com/
 │   │       └── udea/
-│   │           └── filmhub/  # Paquete base
+│   │           └── filmhub/
 │   │               ├── controller/
-│   │               ├── exceptions/  
-│   │               ├── model/        # Entidades JPA (tablas)
-│   │               ├── repository/   # Repositorios JPA
-│   │               ├── service/      # Servicios (lógica de negocio)
-│   │               └── FilmhubApplication.java      
+│   │               ├── exceptions/
+│   │               ├── model/
+│   │               ├── repository/
+│   │               ├── service/
+│   │               └── FilmhubApplication.java
 │   └── resources/
-│       ├── static/                   # Archivos estáticos (si es necesario)
-│       ├── templates/                # Plantillas Thymeleaf (si usas vistas)
-│       ├── application-dev.properties 
+│       ├── static/
+│       ├── templates/
+│       ├── application-dev.properties
 │       ├── application-pdn.properties
-│       └── application.properties    # Configuración de la base de datos y otros
-└── test/                             # Pruebas unitarias e integración
+│       └── application.properties
+└── test/
 ```
 
 ### 📂 Descripción de carpetas
 
-1. **`controller/`**: Contiene los controladores REST que manejan las peticiones HTTP y exponen los endpoints de la API. Cada controlador corresponde a una entidad (por ejemplo, `UsuarioController` para gestionar usuarios).
-
-2. **`model/`**: Define las entidades JPA que representan las tablas en la base de datos. Cada entidad contiene atributos y relaciones mapeadas desde el modelo de datos, como `Usuario`, `ContenidoAudiovisual`, `Recomendacion`, etc.
-
-3. **`repository/`**: Contiene las interfaces que extienden `JpaRepository` para interactuar con la base de datos. Estos repositorios permiten realizar operaciones CRUD sobre las entidades.
-
-4. **`service/`** *(opcional)*: Aquí se puede colocar la lógica de negocio. Si alguna operación en tu API requiere más procesamiento o lógica compleja, se puede implementar en los servicios.
-
-5. **`resources/`**:
-    - **`application.properties`**: Archivo de configuración principal. Contiene las propiedades de la aplicación, como la conexión a la base de datos, el puerto del servidor, etc.
-    - **`static/`** y **`templates/`**: Estas carpetas solo se usarían si tu aplicación incluye una parte de frontend como archivos HTML o plantillas Thymeleaf, pero en una API REST estas pueden no ser necesarias.
-
-6. **`test/`**: Carpeta para pruebas unitarias e integración de los componentes del proyecto.
+1. **`controller/`**: Controladores REST que manejan las peticiones HTTP y definen los endpoints de la API.
+2. **`model/`**: Entidades JPA que representan las tablas en la base de datos.
+3. **`repository/`**: Interfaces que extienden `JpaRepository` para operaciones CRUD.
+4. **`service/`**: Implementación de la lógica de negocio.
+5. **`exceptions/`**: Manejo personalizado de excepciones.
+6. **`resources/`**: Archivos de configuración y recursos estáticos.
+7. **`test/`**: Pruebas unitarias e integración.
 
 ## 📦 Dependencias Principales
 
-Estas son algunas de las dependencias más importantes utilizadas en el proyecto, las cuales están incluidas en el archivo `pom.xml`:
+- **Spring Boot Starter Web**: Configuración para aplicaciones web y REST.
+- **Spring Boot Starter Data JPA**: Integración con JPA y Hibernate.
+- **Microsoft SQL Server JDBC Driver**: Conector para Azure SQL Database.
+- **PostgreSQL Driver**: Conector para PostgreSQL.
+- **Lombok**: Reduce el boilerplate en el código Java.
+- **Spring Boot Starter Test**: Soporte para pruebas unitarias e integración.
 
-- **Spring Boot Starter Web**: Para crear aplicaciones web y exponer REST APIs.
-- **Spring Boot Starter Data JPA**: Para realizar operaciones con bases de datos usando JPA/Hibernate.
-- **Microsoft SQL Server JDBC Driver**: Para conectar con Azure SQL Database.
-- **Lombok** *(En consideración)*: Simplifica el código eliminando la necesidad de escribir getters, setters, etc.
-- **Spring Boot DevTools** *(En consideración)*: Permite reinicios automáticos durante el desarrollo.
+## 🔧 Configuración de Entorno
 
-```xml
-<dependencies>
-    <!-- Dependencia de Spring Web para hacer tu aplicación RESTful -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
+**Clona el repositorio:**
 
-    <!-- Dependencia de Spring Data JPA para interactuar con la base de datos -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <!-- Driver de conexión a SQL Server (Azure SQL Database) -->
-    <dependency>
-        <groupId>com.microsoft.sqlserver</groupId>
-        <artifactId>mssql-jdbc</artifactId>
-        <version>9.4.0.jre8</version>
-    </dependency>
-
-    <!-- Lombok (opcional, para simplificar getters y setters) -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <scope>provided</scope>
-    </dependency>
-
-    <!-- Spring Boot DevTools (opcional, para reinicios automáticos en desarrollo) -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <optional>true</optional>
-    </dependency>
-</dependencies>
-```
-
-## ⚙️ Configuración de la Base de Datos en Azure SQL
-
-El archivo `application.properties` incluye la configuración para conectar tu aplicación Spring Boot con Azure SQL Database.
-
-```properties
-# Datos de conexión para Azure SQL Database
-spring.datasource.url=jdbc:sqlserver://<nombre-servidor>.database.windows.net:1433;database=<nombre-base-datos>
-spring.datasource.username=<tu-usuario>
-spring.datasource.password=<tu-contraseña>
-spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
-
-# Configuración de JPA y Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
-```
-
-### Configuración requerida:
-
-1. Reemplaza `<nombre-servidor>`, `<nombre-base-datos>`, `<tu-usuario>` y `<tu-contraseña>` con los valores correctos de tu base de datos en Azure.
-2. Asegúrate de que tu firewall en Azure esté configurado para permitir conexiones desde tu máquina local o servicio donde esté desplegada la aplicación.
-
-## ⚙️ Configuración del Entorno
-
-1. **Clonar el repositorio:**
-
-    ```bash
+```bash
     git clone https://github.com/RickContreras/FilmHub-backend.git
     cd FilmHub-backend
-    ```
+```
 
-2. **Configurar la base de datos:**
 
-   Asegúrate de tener PostgreSQL instalado y ejecutándose. Luego, crea una base de datos llamada `filmhub`.
+### Azure SQL Database
 
-    ```sql
-    CREATE DATABASE filmhub;
-    ```
+1. Crea un archivo `env.sh`:
 
-3. **Configurar las propiedades de la aplicación:**
+```sh
+#!/bin/sh
 
-   Edita el archivo `src/main/resources/application-dev.properties` con las credenciales de tu base de datos:
+echo "Estableciendo variables de entorno"
 
-    ```ini
-    spring.datasource.url=jdbc:postgresql://localhost:5432/filmhub
-    spring.datasource.username=tu_usuario
-    spring.datasource.password=tu_contraseña
-    ```
+export AZ_RESOURCE_GROUP=filmhub-backend
+export AZ_DATABASE_NAME=filmhub-server
+export AZ_LOCATION=australiaeast
+export AZ_SQL_SERVER_USERNAME=spring
+export AZ_SQL_SERVER_PASSWORD=XXXXXXXXXXXXXXXXXX
+export AZ_LOCAL_IP_ADDRESS=$(curl -s https://api.ipify.org)
 
-4. **Construir y ejecutar la aplicación:**
+export SPRING_DATASOURCE_URL="jdbc:sqlserver://$AZ_DATABASE_NAME.database.windows.net:1433;database=demo;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+export SPRING_DATASOURCE_USERNAME=spring@$AZ_DATABASE_NAME
+export SPRING_DATASOURCE_PASSWORD=$AZ_SQL_SERVER_PASSWORD
+```
 
-    Haz clic en el siguiente botón para abrir este proyecto en GitHub Codespaces:
+2. Configura un `AZ_DATABASE_NAME` único y una `AZ_SQL_SERVER_PASSWORD` segura.
 
-    [![Abrir en Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=RickContreras/filmhub-backend)
 
-    ```bash
-    mvn clean install
-    mvn spring-boot:run
-    ```
+### PostgreSQL
 
-   La aplicación estará disponible en `http://localhost:8080`.
+1. Instala y configura PostgreSQL.
+2. Crea la base de datos:
+
+```sql
+CREATE DATABASE filmhub;
+```
+
+3. Configura `src/main/resources/application-dev.properties`:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/filmhub
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+```
+
+## 🏗️ Creación de la Infraestructura
+
+Para Azure SQL Database:
+
+```sh
+az login
+az extension add --name serviceconnector-passwordless --upgrade
+source env.sh
+./create-spring-data-jpa-sql-server.sh
+```
+
+Crear usuario no administrador:
+
+```sh
+az connection create sql \
+--resource-group $AZ_RESOURCE_GROUP \
+--connection sql_conn \
+--target-resource-group $AZ_RESOURCE_GROUP \
+--server $AZ_DATABASE_NAME \
+--database demo \
+--user-account \
+--query authInfo.userName \
+--output tsv
+```
+
+## 💥 Destrucción de la Infraestructura
+
+Para eliminar la infraestructura de Azure:
+
+```sh
+./destroy-spring-data-jpa-sql-server.sh
+```
+
+## 🚀 Compilación y Ejecución del Proyecto
+
+```sh
+./mvnw clean install
+./mvnw spring-boot:run
+```
+
+O usa el botón para abrir en GitHub Codespaces y ejecutalos para trabajar con PostgreSQL:
+
+[![Abrir en Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=RickContreras/filmhub-backend)
  
-
-5. **Prueba la API**: Puedes usar **Postman** o **cURL** para interactuar con los endpoints de la API.
-
-   Ejemplo para recibir un saludo:
-
-   ```bash
-   GET http://localhost:8080/api/saludar
-   ```
-
-   Ejemplo para obtener todos los usuarios:
-
-   ```bash
-   GET http://localhost:8080/api/usuarios
-   ```
-
 
 ## 🧪 Pruebas
 
-Las pruebas unitarias y de integración pueden ser ejecutadas desde la carpeta `test/`. Para ejecutar las pruebas, usa:
+Ejecuta las pruebas con:
 
-```bash
-mvn test
+```sh
+./mvnw test
 ```
 
 ## 📡 Endpoints
 
-- **GET /contenidos**: Obtiene todos los contenidos.
-- **GET /contenidos/{id}**: Obtiene un contenido por ID.
-- **GET /usuarios/{id}/contenidos**: Obtiene los contenidos asociados a un usuario.
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET | `/api/contenidos` | Obtiene todos los contenidos |
+| GET | `/api/contenidos/{id}` | Obtiene un contenido por ID |
+| GET | `/api/usuarios/{id}/contenidos` | Obtiene los contenidos de un usuario |
+| POST | `/api/usuarios` | Crea un nuevo usuario |
+| PUT | `/api/usuarios/{id}` | Actualiza un usuario existente |
+| DELETE | `/api/usuarios/{id}` | Elimina un usuario |
+
+(En desarrollo)
 
 ## 🤝 Contribuir
 
-1. **Fork el repositorio**
-2. **Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`)**
-3. **Haz commit de tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)**
-4. **Haz push a la rama (`git push origin feature/nueva-funcionalidad`)**
-5. **Abre un Pull Request**
+1. Fork el repositorio
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`)
+3. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+Por favor, asegúrate de actualizar las pruebas según sea necesario y sigue nuestro código de conducta.
 
 ## 🔒 Seguridad
 
-Este proyecto aún no incluye seguridad, pero se podría integrar fácilmente con **Spring Security** para proteger ciertos endpoints con autenticación y autorización.
+Actualmente, este proyecto no implementa medidas de seguridad. Para un entorno de producción, se recomienda integrar:
+
+- **Spring Security** para autenticación y autorización.
+- **JWT** para manejo de tokens de sesión.
+- **HTTPS** para encriptación de datos en tránsito.
+- Implementar buenas prácticas como validación de entrada, manejo seguro de errores, y protección contra ataques comunes (CSRF, XSS, etc.).
+
+---
+
+Desarrollado con ❤️ por el equipo de Filmhub
 
 
 

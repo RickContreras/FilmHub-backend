@@ -45,8 +45,6 @@ export SPRING_DATASOURCE_USERNAME=spring@$AZ_DATABASE_NAME
 export SPRING_DATASOURCE_PASSWORD=$AZ_SQL_SERVER_PASSWORD
 ```
 
-
-# Creacion de la infraestructura
 Asegúrate de configurar un *AZ_DATABASE_NAME* único y una *AZ_SQL_SERVER_PASSWORD* correctamente asegurada.
 
 # Creacion de la infraestructura
