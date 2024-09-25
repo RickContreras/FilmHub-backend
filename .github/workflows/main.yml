@@ -9,7 +9,7 @@ on:
 
 
 env:
-  AZURE_WEBAPP_NAME: 'filmhub'   # set this to your application's name
+  AZURE_WEBAPP_NAME: 'filmhub-backend-app'   # set this to your application's name
   JAVA_VERSION: '21'                  # set this to the Java version to use
   MAVEN_VERSION: '3.9.9'              # set this to the Maven version to use
 
