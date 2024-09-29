@@ -1,7 +1,7 @@
 package com.udea.filmhub.model;
 import jakarta.persistence.*;
 import java.sql.Time;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
@@ -14,7 +14,7 @@ public class Contenido {
     private String titulo;
 
     @Column(name = "anio_lanzamiento")
-    private LocalDateTime anioLanzamiento;
+    private LocalDate anioLanzamiento;
 
     private String poster;
     private String sinopsis;
@@ -72,11 +72,11 @@ public class Contenido {
         this.titulo = titulo;
     }
 
-    public LocalDateTime getAnioLanzamiento() {
+    public LocalDate getAnioLanzamiento() {
         return anioLanzamiento;
     }
 
-    public void setAnioLanzamiento(LocalDateTime anioLanzamiento) {
+    public void setAnioLanzamiento(LocalDate anioLanzamiento) {
         this.anioLanzamiento = anioLanzamiento;
     }
 

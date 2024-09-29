@@ -2,6 +2,8 @@ package com.udea.filmhub.model;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
+
 @Entity
 @Table(name = "clasificacion")
 public class Clasificacion {
@@ -18,6 +20,13 @@ public class Clasificacion {
     // Relaciones
     @OneToMany(mappedBy = "clasificacion")
     private Set<Contenido> contenidos = new HashSet<>();
+
+    //Constructors
+    public Clasificacion() {}
+    public Clasificacion(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
     // Getters and setters
     public Long getId() {
@@ -50,5 +59,11 @@ public class Clasificacion {
 
     public void setContenidos(Set<Contenido> contenidos) {
         this.contenidos = contenidos;
+    }
+    public Clasificacion orElseThrow(Supplier<? extends RuntimeException> exceptionSupplier) {
+        if (this == null) {
+            throw exceptionSupplier.get();
+        }
+        return this;
     }
 }

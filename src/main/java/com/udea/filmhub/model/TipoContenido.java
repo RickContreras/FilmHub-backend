@@ -2,6 +2,8 @@ package com.udea.filmhub.model;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
+
 @Entity
 @Table(name = "tipo_contenido")
 public class TipoContenido {
@@ -15,6 +17,13 @@ public class TipoContenido {
     // Relaciones
     @OneToMany(mappedBy = "tipoContenido")
     private Set<Contenido> contenidos = new HashSet<>();
+
+    //Constructors
+    public TipoContenido() {}
+
+    public TipoContenido(String nombre) {
+        this.nombre = nombre;
+    }
 
     // Getters, setters, constructors...
     public Set<Contenido> getContenidos() {
@@ -39,5 +48,12 @@ public class TipoContenido {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    //Todo: Implementar el método orElseThrow
+    public TipoContenido orElseThrow(Supplier<? extends RuntimeException> exceptionSupplier) {
+        if (this == null) {
+            throw exceptionSupplier.get();
+        }
+        return this;
     }
 }
