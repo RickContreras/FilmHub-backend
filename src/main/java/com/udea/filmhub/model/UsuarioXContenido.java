@@ -17,7 +17,6 @@ public class UsuarioXContenido {
     private Boolean isView;
 
     // Relaciones
-
     @ManyToOne
     @JoinColumn(name = "id_contenido")
     private Contenido contenido;
@@ -31,5 +30,59 @@ public class UsuarioXContenido {
     private Estado estado;
 
     // Getters, setters, constructors
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(Boolean liked) {
+        isLiked = liked;
+    }
+
+    public LocalDate getFechaAgregado() {
+        return fechaAgregado;
+    }
+
+    public void setFechaAgregado(LocalDate fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    public Boolean getView() {
+        return isView;
+    }
+
+    public void setView(Boolean view) {
+        isView = view;
+    }
+
+    public Contenido getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(Contenido contenido) {
+        this.contenido = contenido;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

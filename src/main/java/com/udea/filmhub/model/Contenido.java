@@ -1,11 +1,9 @@
 package com.udea.filmhub.model;
 import jakarta.persistence.*;
-
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Table(name = "contenido")
 public class Contenido {
@@ -34,7 +32,6 @@ public class Contenido {
     private Time duracionPromedioEpisodio;
 
     // Relaciones
-
     @ManyToOne
     @JoinColumn(name = "id_clasificacion", nullable = false)
     private Clasificacion clasificacion;
@@ -59,4 +56,115 @@ public class Contenido {
     private Set<Genero> generos = new HashSet<>();
 
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public LocalDateTime getAnioLanzamiento() {
+        return anioLanzamiento;
+    }
+
+    public void setAnioLanzamiento(LocalDateTime anioLanzamiento) {
+        this.anioLanzamiento = anioLanzamiento;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getSinopsis() {
+        return sinopsis;
+    }
+
+    public void setSinopsis(String sinopsis) {
+        this.sinopsis = sinopsis;
+    }
+
+    public Float getImdbRating() {
+        return imdbRating;
+    }
+
+    public void setImdbRating(Float imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
+    public Integer getNumTotalEpisodios() {
+        return numTotalEpisodios;
+    }
+
+    public void setNumTotalEpisodios(Integer numTotalEpisodios) {
+        this.numTotalEpisodios = numTotalEpisodios;
+    }
+
+    public Integer getNumTotalTemporadas() {
+        return numTotalTemporadas;
+    }
+
+    public void setNumTotalTemporadas(Integer numTotalTemporadas) {
+        this.numTotalTemporadas = numTotalTemporadas;
+    }
+
+    public Time getDuracionPromedioEpisodio() {
+        return duracionPromedioEpisodio;
+    }
+
+    public void setDuracionPromedioEpisodio(Time duracionPromedioEpisodio) {
+        this.duracionPromedioEpisodio = duracionPromedioEpisodio;
+    }
+
+    public Clasificacion getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public TipoContenido getTipoContenido() {
+        return tipoContenido;
+    }
+
+    public void setTipoContenido(TipoContenido tipoContenido) {
+        this.tipoContenido = tipoContenido;
+    }
+
+    public Idioma getIdiomaOriginal() {
+        return idiomaOriginal;
+    }
+
+    public void setIdiomaOriginal(Idioma idiomaOriginal) {
+        this.idiomaOriginal = idiomaOriginal;
+    }
+
+    public Set<UsuarioXContenido> getUsuariosXContenido() {
+        return usuariosXContenido;
+    }
+
+    public void setUsuariosXContenido(Set<UsuarioXContenido> usuariosXContenido) {
+        this.usuariosXContenido = usuariosXContenido;
+    }
+
+    public Set<Genero> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(Set<Genero> generos) {
+        this.generos = generos;
+    }
 }

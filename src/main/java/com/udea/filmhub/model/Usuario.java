@@ -22,7 +22,6 @@ public class Usuario {
     private Set<UsuarioXContenido> usuariosXContenido = new HashSet<>();
 
     // Getters and Setters
-
     public String getNombre() {
         return nombre;
     }
