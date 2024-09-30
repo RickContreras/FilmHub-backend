@@ -191,7 +191,15 @@ Para eliminar la infraestructura de Azure:
 O usa el botón para abrir en GitHub Codespaces y ejecutalos para trabajar con PostgreSQL:
 
 [![Abrir en Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=RickContreras/filmhub-backend)
- 
+
+Nota: Si desea usar swagger en codespaces cambien lo siguiente en 'application-dev.properties'
+
+
+ ```sh
+swagger.server.url=https://la-url-de-su-codespace.dev/api
+```
+
+Ademas ponga el puerto "Publico" y en "http".
 
 ## 🧪 Pruebas
 
