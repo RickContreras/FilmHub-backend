@@ -1,11 +1,7 @@
 package com.udea.filmhub.config;
 
-import com.udea.filmhub.model.Clasificacion;
-import com.udea.filmhub.model.TipoContenido;
-import com.udea.filmhub.model.Idioma;
-import com.udea.filmhub.repository.ClasificacionRepository;
-import com.udea.filmhub.repository.TipoContenidoRepository;
-import com.udea.filmhub.repository.IdiomaRepository;
+import com.udea.filmhub.model.*;
+import com.udea.filmhub.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,6 +17,12 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private IdiomaRepository idiomaRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
+
+    @Autowired
+    private GeneroRepository generoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -38,5 +40,13 @@ public class DataInitializer implements CommandLineRunner {
         idiomaRepository.save(new Idioma("English"));
         idiomaRepository.save(new Idioma("Spanish"));
         idiomaRepository.save(new Idioma("French"));
+
+        //Insertar datos de ejemplo en la tabla estado.
+        estadoRepository.save(new Estado("Visto"));
+        estadoRepository.save(new Estado("Por ver"));
+
+        //Insertar datos de ejemplo en la tabla genero.
+        generoRepository.save(new Genero("Accion"));
+        generoRepository.save(new Genero("Comedia"));
     }
 }

@@ -16,6 +16,13 @@ public class Genero {
     @ManyToMany(mappedBy = "generos")
     private Set<Contenido> contenidos = new HashSet<>();
 
+    public Genero() {
+    }
+
+    public Genero(String nombre) {
+        this.nombre = nombre;
+    }
+
     // Getters, setters, constructors...
     public Long getId() {
         return id;

@@ -16,6 +16,13 @@ public class Estado {
     @OneToMany(mappedBy = "estado")
     private Set<UsuarioXContenido> usuariosXContenido = new HashSet<>();
 
+    public Estado() {
+    }
+
+    public Estado(String nombre) {
+        this.nombre=nombre;
+    }
+
     // Getters, setters, constructors...
     public Long getId() {
         return id;
