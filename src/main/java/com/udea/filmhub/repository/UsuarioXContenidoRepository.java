@@ -13,4 +13,8 @@ public interface UsuarioXContenidoRepository extends JpaRepository<UsuarioXConte
     List<UsuarioXContenido> findByContenidoId(Long contenidoId);
     List<UsuarioXContenido> findByIsLiked(Boolean isLiked);
     List<UsuarioXContenido> findByIsView(Boolean isView);
+
+    // Metodo para encontrar los contenido asociados a un usuario
+    // @Query("SELECT uxc.contenido FROM UsuarioXContenido uxc WHERE uxc.usuario.id = :usuarioId")
+    // List<Contenido> findContenidosByUsuarioId(@Param("usuarioId") Long usuarioId);
 }

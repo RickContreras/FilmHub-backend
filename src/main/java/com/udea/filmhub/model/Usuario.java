@@ -14,12 +14,18 @@ public class Usuario {
     private String contrasena;
     private String avatar;
 
-    @Column(name = "fecha_registro")
+    @Column(name = "fecha_registro",updatable = false)
     private LocalDate fechaRegistro;
 
     // Relaciones
     @OneToMany(mappedBy = "usuario")
-    private Set<UsuarioXContenido> usuariosXContenido = new HashSet<>();
+    private Set<UsuarioXContenido> contenidos = new HashSet<>();
+
+    // Inicialización de fechaRegistro
+    @PrePersist
+    protected void onCreate() {
+        this.fechaRegistro = LocalDate.now();
+    }
 
     // Getters and Setters
     public String getNombre() {
@@ -62,12 +68,12 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Set<UsuarioXContenido> getUsuariosXContenido() {
-        return usuariosXContenido;
+    public Set<UsuarioXContenido> getContenidos() {
+        return contenidos;
     }
 
-    public void setUsuariosXContenido(Set<UsuarioXContenido> usuariosXContenido) {
-        this.usuariosXContenido = usuariosXContenido;
+    public void setContenidos(Set<UsuarioXContenido> contenidos) {
+        this.contenidos = contenidos;
     }
 
     public Long getId() {
