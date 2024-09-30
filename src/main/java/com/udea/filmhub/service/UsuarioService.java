@@ -52,4 +52,10 @@ public class UsuarioService {
         usuario.setAvatar(usuarioDTO.getAvatar());
         return usuario;
     }
+
+    public UsuarioDTO getUsuarioByCorreo(String correo) {
+        Usuario usuario = usuarioRepository.findByEmail(correo)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + correo));
+        return convertToDTO(usuario);
+    }
 }
