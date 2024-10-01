@@ -65,4 +65,3 @@ public class UsuarioXContenidoRequestDTO {
         this.isView = isView;
     }
 }
-
