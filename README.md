@@ -199,7 +199,7 @@ Nota: Si desea usar swagger en codespaces cambien lo siguiente en 'application-d
 swagger.server.url=https://la-url-de-su-codespace.dev/api
 ```
 
-Ademas ponga el puerto "Publico" y en "http".
+Ademas ponga el puerto 8080 en "Publico" y en "http".
 
 ## 🧪 Pruebas
 

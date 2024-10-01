@@ -9,12 +9,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/contenido-usuario")
-@Tag(name = "UsuarioXContenido", description = "Operaciones relacionadas con la relación Usuario-Contenido")
+@CrossOrigin(origins = "*")
+@Tag(name = "Contenido-Usuario", description = "Operaciones relacionadas con la relación Contenido-Usuario")
 public class UsuarioXContenidoController {
 
     @Autowired
