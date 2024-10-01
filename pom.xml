@@ -15,8 +15,12 @@
 	<description>Aplicacion REST API para una aplicacion de contenido audivisual</description>
 	<url/>
 	<licenses>
-		<license/>
-	</licenses>
+        <license>
+            <name>GNU General Public License, Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 	<developers>
 		<developer/>
 	</developers>

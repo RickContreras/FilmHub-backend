@@ -30,6 +30,13 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.createUsuario(usuarioDTO));
     }
 
+    //get por correo para usuario.
+    @GetMapping("/correo/{correo}")
+    @Operation(summary = "Obtener un usuario por correo", description = "Devuelve un usuario por su correo")
+    public ResponseEntity<UsuarioDTO> getUsuarioByCorreo(@PathVariable String correo) {
+        return ResponseEntity.ok(usuarioService.getUsuarioByCorreo(correo));
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Obtener un usuario por ID", description = "Devuelve un usuario por su ID")
     public ResponseEntity<UsuarioDTO> getUsuario(@PathVariable Long id) {
