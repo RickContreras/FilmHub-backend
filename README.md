@@ -78,6 +78,7 @@ src/
 │       └── application.properties
 └── test/
 ```
+(🚧 Por actualizar)
 
 ### 📂 Descripción de carpetas
 
@@ -89,13 +90,15 @@ src/
 6. **`resources/`**: Archivos de configuración y recursos estáticos.
 7. **`test/`**: Pruebas unitarias e integración.
 
+(🚧 Por actualizar)
+
 ## 📦 Dependencias Principales
 
 - **Spring Boot Starter Web**: Configuración para aplicaciones web y REST.
 - **Spring Boot Starter Data JPA**: Integración con JPA y Hibernate.
 - **Microsoft SQL Server JDBC Driver**: Conector para Azure SQL Database.
 - **PostgreSQL Driver**: Conector para PostgreSQL.
-- **Lombok**: Reduce el boilerplate en el código Java.
+- **Lombok**(🚧 Por implementar): Reduce el boilerplate en el código Java.
 - **Spring Boot Starter Test**: Soporte para pruebas unitarias e integración.
 
 ## 🔧 Configuración de Entorno
@@ -195,7 +198,6 @@ O usa el botón para abrir en GitHub Codespaces y ejecutalos para trabajar con P
 
 Nota: Si desea usar swagger en codespaces cambien lo siguiente en 'application-dev.properties'
 
-
  ```sh
 swagger.server.url=https://la-url-de-su-codespace.dev/api
 ```
@@ -209,6 +211,7 @@ Ejecuta las pruebas con:
 ```sh
 ./mvnw test
 ```
+(🚧 En desarrollo)
 
 ## 📡 Endpoints
 
@@ -221,7 +224,7 @@ Ejecuta las pruebas con:
 | PUT | `/api/usuarios/{id}` | Actualiza un usuario existente |
 | DELETE | `/api/usuarios/{id}` | Elimina un usuario |
 
-(En desarrollo)
+(🚧 En desarrollo)
 
 ## 🤝 Contribuir
 
@@ -242,9 +245,7 @@ Actualmente, este proyecto no implementa medidas de seguridad. Para un entorno d
 - **HTTPS** para encriptación de datos en tránsito.
 - Implementar buenas prácticas como validación de entrada, manejo seguro de errores, y protección contra ataques comunes (CSRF, XSS, etc.).
 
+(🚧 En desarrollo)
 ---
 
 Desarrollado con ❤️ por el equipo de Filmhub
-
-
-
