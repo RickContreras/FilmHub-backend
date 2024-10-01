@@ -2,7 +2,7 @@
     "name": "spring-boot-app-service-postgresql-infra",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
-    "workspaceFolder": "/workspaces",
+    "workspaceFolder": "/workspace",
     "features": {
         "ghcr.io/azure/azure-dev/azd:latest": {}
     },
