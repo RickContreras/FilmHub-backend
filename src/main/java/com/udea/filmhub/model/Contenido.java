@@ -55,6 +55,22 @@ public class Contenido {
     )
     private Set<Genero> generos = new HashSet<>();
 
+    public Contenido() {
+    }
+
+    public Contenido(String titulo, LocalDate anioLanzamiento, String poster, String sinopsis, Float imdbRating, Integer numTotalEpisodios, Integer numTotalTemporadas, Clasificacion clasificacion, TipoContenido tipoContenido, Idioma idiomaOriginal) {
+        this.titulo = titulo;
+        this.anioLanzamiento = anioLanzamiento;
+        this.poster = poster;
+        this.sinopsis = sinopsis;
+        this.imdbRating = imdbRating;
+        this.numTotalEpisodios = numTotalEpisodios;
+        this.numTotalTemporadas = numTotalTemporadas;
+        this.clasificacion = clasificacion;
+        this.tipoContenido = tipoContenido;
+        this.idiomaOriginal = idiomaOriginal;
+    }
+
     // Getters and Setters
     public Long getId() {
         return id;
