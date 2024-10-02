@@ -17,6 +17,8 @@ public class Contenido {
     private LocalDate anioLanzamiento;
 
     private String poster;
+
+    @Column(columnDefinition = "TEXT")
     private String sinopsis;
 
     @Column(name = "imdb_rating")
