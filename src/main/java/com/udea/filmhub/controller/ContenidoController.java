@@ -1,6 +1,7 @@
 package com.udea.filmhub.controller;
 
 import com.udea.filmhub.dto.ContenidoDTO;
+import com.udea.filmhub.dto.UsuarioXContenidoResponseDTO;
 import com.udea.filmhub.model.Contenido;
 import com.udea.filmhub.service.ContenidoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,5 +53,12 @@ public class ContenidoController {
     public ResponseEntity<Void> deleteContenido(@PathVariable Long id) {
         contenidoService.deleteContenido(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    @Operation(summary = "Obtener contenidos por usuario", description = "Devuelve una lista de contenidos asociados a un usuario")
+    public ResponseEntity<List<ContenidoDTO>> getContenidosByUsuario(@PathVariable Long usuarioId) {
+        List<ContenidoDTO> contenidos = contenidoService.getContenidosByUsuario(usuarioId);
+        return ResponseEntity.ok(contenidos);
     }
 }
