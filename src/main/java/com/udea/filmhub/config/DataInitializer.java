@@ -56,10 +56,21 @@ public class DataInitializer implements CommandLineRunner {
         generoRepository.save(new Genero("Accion"));
         generoRepository.save(new Genero("Comedia"));
         generoRepository.save(new Genero("Drama"));
+        generoRepository.save(new Genero("Ciencia Ficcion"));
+        generoRepository.save(new Genero("Terror"));
+        generoRepository.save(new Genero("Romance"));
+        generoRepository.save(new Genero("Aventura"));
+        generoRepository.save(new Genero("Fantasia"));
+        generoRepository.save(new Genero("Misterio"));
+        generoRepository.save(new Genero("Documental"));
 
         // Insertar datos de ejemplo en la tabla Estado
         estadoRepository.save(new Estado("Visto"));
-        estadoRepository.save(new Estado("Por ver"));
+        estadoRepository.save(new Estado("Eliminado"));
+        estadoRepository.save(new Estado("Agregado"));
+        estadoRepository.save(new Estado("Favorito"));
+        estadoRepository.save(new Estado("Recomendado"));
+
 
 
         // Leer contenidos desde el archivo JSON

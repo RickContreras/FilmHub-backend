@@ -199,7 +199,7 @@ O usa el botón para abrir en GitHub Codespaces y ejecutalos para trabajar con P
 Nota: Si desea usar swagger en codespaces cambien lo siguiente en 'application-dev.properties'
 
  ```sh
-swagger.server.url=https://la-url-de-su-codespace.dev/api
+swagger.server.url=https://la-url-de-su-codespace-8080.app.github.dev/api
 ```
 
 Ademas ponga el puerto 8080 en "Publico" y en "http".
