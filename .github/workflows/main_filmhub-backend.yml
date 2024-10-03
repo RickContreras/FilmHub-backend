@@ -27,15 +27,13 @@ jobs:
           echo "${{ vars.SPRING_DATASOURCE_URL }}"
           echo "${{ vars.SPRING_DATASOURCE_USERNAME }}"
           echo "${{ secrets.SPRING_DATASOURCE_PASSWORD }}"
-          echo "${{ secrets.AZURE_SQL_SERVER_PASSWORD }}"
 
       - name: Build with Maven
         run: ./mvnw clean install
         env:
-          SPRING_DATASOURCE_URL: ${{ env.SPRING_DATASOURCE_URL }}
-          SPRING_DATASOURCE_USERNAME: ${{ env.SPRING_DATASOURCE_USERNAME }}
+          SPRING_DATASOURCE_URL: ${{ vars.SPRING_DATASOURCE_URL }}
+          SPRING_DATASOURCE_USERNAME: ${{ vars.SPRING_DATASOURCE_USERNAME }}
           SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
-          AZURE_SQL_SERVER_PASSWORD: ${{ secrets.AZURE_SQL_SERVER_PASSWORD }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
