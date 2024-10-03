@@ -27,6 +27,13 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
+      - name: Show environment variables
+        run: |
+          echo "SPRING_DATASOURCE_URL=${{ env.SPRING_DATASOURCE_URL }}"
+          echo "SPRING_DATASOURCE_USERNAME=${{ env.SPRING_DATASOURCE_USERNAME }}"
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}"
+          echo "AZURE_SQL_SERVER_PASSWORD=${{ secrets.AZURE_SQL_SERVER_PASSWORD }}"
+
       - name: Build with Maven
         run: ./mvnw clean install
         env:
