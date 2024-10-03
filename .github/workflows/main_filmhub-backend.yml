@@ -4,9 +4,6 @@
 name: Build and deploy JAR app to Azure Web App - filmhub-backend
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -21,12 +18,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'microsoft'
-
-      - name: Show environment variables
-        run: |
-          echo "${{ vars.SPRING_DATASOURCE_URL }}"
-          echo "${{ vars.SPRING_DATASOURCE_USERNAME }}"
-          echo "${{ secrets.SPRING_DATASOURCE_PASSWORD }}"
 
       - name: Build with Maven
         run: ./mvnw clean install
