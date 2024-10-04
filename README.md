@@ -65,6 +65,7 @@ src/
 │   │       └── udea/
 │   │           └── filmhub/
 │   │               ├── controller/
+|   |               ├── dto/
 │   │               ├── exceptions/
 │   │               ├── model/
 │   │               ├── repository/
@@ -79,6 +80,8 @@ src/
 └── test/
 ```
 (🚧 Por actualizar)
+
+Nota: Poner la carpeta de los dtos y config.
 
 ### 📂 Descripción de carpetas
 
