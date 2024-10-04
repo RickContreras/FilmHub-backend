@@ -66,6 +66,7 @@ src/
 │   │           └── filmhub/
 │   │               ├── controller/
 |   |               ├── dto/
+|   |               ├── config/
 │   │               ├── exceptions/
 │   │               ├── model/
 │   │               ├── repository/
