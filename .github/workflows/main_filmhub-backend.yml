@@ -19,11 +19,15 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: 'java21'
+          java-version: '21'
           distribution: 'microsoft'
 
       - name: Build with Maven
         run: mvn clean install
+        env:
+          SPRING_DATASOURCE_URL: ${{ vars.SPRING_DATASOURCE_URL }}
+          SPRING_DATASOURCE_USERNAME: ${{ vars.SPRING_DATASOURCE_USERNAME }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -60,4 +64,8 @@ jobs:
           app-name: 'filmhub-backend'
           slot-name: 'Production'
           package: '*.jar'
+        env:
+          SPRING_DATASOURCE_URL: ${{ vars.SPRING_DATASOURCE_URL }}
+          SPRING_DATASOURCE_USERNAME: ${{ vars.SPRING_DATASOURCE_USERNAME }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
           
