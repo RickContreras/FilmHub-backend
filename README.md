@@ -218,15 +218,23 @@ Ejecuta las pruebas con:
 (🚧 En desarrollo)
 
 ## 📡 Endpoints
+Todos los endpoints inician con ´/api´:
 
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/api/contenidos` | Obtiene todos los contenidos |
-| GET | `/api/contenidos/{id}` | Obtiene un contenido por ID |
-| GET | `/api/usuarios/{id}/contenidos` | Obtiene los contenidos de un usuario |
-| POST | `/api/usuarios` | Crea un nuevo usuario |
-| PUT | `/api/usuarios/{id}` | Actualiza un usuario existente |
-| DELETE | `/api/usuarios/{id}` | Elimina un usuario |
+| Método | Endpoint                          | Descripción |
+|--------|-----------------------------------|-------------|
+| GET    | `/contenidos`                     | Obtiene todos los contenidos |
+| GET    | `/contenidos/{id}`                | Obtiene un contenido por ID |
+| POST   | `/contenidos`                     | Crea un nuevo contenido |
+| DELETE | `/contenidos/{id}`                | Elimina un contenido por ID |
+| GET    | `/contenidos/usuario/{usuarioId}` | Obtiene los contenidos de un usuario |
+| POST   | `/contenidousuario`               | Añade un contenido a un usuario |
+| DELETE | `/contenidousuario/{id}`          | Elimina la relación de un contenido con un usuario |
+| GET    | `/usuarios`                       | Obtiene todos los usuarios |
+| POST   | `/usuarios`                       | Crea un nuevo usuario |
+| GET    | `/usuarios/correo/{correo}`       | Obtiene un usuario por correo |
+| GET    | `/usuarios/{id}`                  | Obtiene un usuario por ID |
+| DELETE | `/usuarios/{id}`                  | Elimina un usuario por ID |
+| GET    | `/saludar`                        | Saluda con "Hola Mundo!" |
 
 (🚧 En desarrollo)
 
