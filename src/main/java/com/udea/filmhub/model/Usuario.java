@@ -27,6 +27,18 @@ public class Usuario {
         this.fechaRegistro = LocalDate.now();
     }
 
+    
+    //Constructors
+    public Usuario() {}
+
+    public Usuario(String nombre, String email, String contrasena, String avatar) {
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.avatar = avatar;
+    }
+    
+    
     // Getters and Setters
     public String getNombre() {
         return nombre;
