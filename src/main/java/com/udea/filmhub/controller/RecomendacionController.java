@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/recomendaciones")
+@CrossOrigin(origins = "*")
 public class RecomendacionController {
 
     @Autowired

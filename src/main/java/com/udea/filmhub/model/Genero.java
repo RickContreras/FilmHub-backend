@@ -16,6 +16,10 @@ public class Genero {
     @ManyToMany(mappedBy = "generos")
     private Set<Contenido> contenidos = new HashSet<>();
 
+    @OneToMany(mappedBy = "genero")
+    private Set<GeneroXUsuario> usuarios = new HashSet<>();
+
+
     public Genero() {
     }
 
@@ -46,5 +50,13 @@ public class Genero {
 
     public void setContenidos(Set<Contenido> contenidos) {
         this.contenidos = contenidos;
+    }
+
+    public Set<GeneroXUsuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<GeneroXUsuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

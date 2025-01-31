@@ -24,6 +24,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<Recomendacion> recomendaciones = new HashSet<>();
 
+    @OneToMany(mappedBy = "usuario")
+    private Set<GeneroXUsuario> generos = new HashSet<>();
+
 
     // Inicialización de fechaRegistro
     @PrePersist
@@ -106,5 +109,13 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<GeneroXUsuario> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(Set<GeneroXUsuario> generos) {
+        this.generos = generos;
     }
 }

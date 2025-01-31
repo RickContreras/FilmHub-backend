@@ -43,6 +43,10 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private UsuarioXContenidoRepository usuarioXContenidoRepository;
 
+    @Autowired
+    private GeneroXUsuarioRepository generoXUsuarioRepository;
+
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -103,6 +107,10 @@ public class DataInitializer implements CommandLineRunner {
         Recomendacion recomendacion2 = new Recomendacion(LocalDate.now(), usuario, contenido, agregado);
         recomendacionRepository.save(recomendacion2);
 
+        // Insertar datos de ejemplo en la tabla GeneroXUsuario
+        GeneroXUsuario generoXUsuario1 = new GeneroXUsuario(usuario, accion);
+        generoXUsuarioRepository.save(generoXUsuario1);
+        
 
         // Insertar datos de ejemplo en la tabla Genero
         //generoRepository.save(new Genero("Accion"));
