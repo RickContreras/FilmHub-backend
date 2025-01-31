@@ -16,6 +16,10 @@ public class Estado {
     @OneToMany(mappedBy = "estado")
     private Set<UsuarioXContenido> usuariosXContenido = new HashSet<>();
 
+    @OneToMany(mappedBy = "estado")
+    private Set<Recomendacion> recomendaciones = new HashSet<>();
+
+
     public Estado() {
     }
 
@@ -46,5 +50,13 @@ public class Estado {
 
     public void setUsuariosXContenido(Set<UsuarioXContenido> usuariosXContenido) {
         this.usuariosXContenido = usuariosXContenido;
+    }
+
+    public Set<Recomendacion> getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(Set<Recomendacion> recomendaciones) {
+        this.recomendaciones = recomendaciones;
     }
 }

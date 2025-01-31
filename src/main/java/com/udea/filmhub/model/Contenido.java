@@ -57,6 +57,9 @@ public class Contenido {
     )
     private Set<Genero> generos = new HashSet<>();
 
+    @OneToMany(mappedBy = "contenido")
+    private Set<Recomendacion> recomendaciones = new HashSet<>();
+
     public Contenido() {
     }
 
@@ -184,5 +187,13 @@ public class Contenido {
 
     public void setGeneros(Set<Genero> generos) {
         this.generos = generos;
+    }
+
+    public Set<Recomendacion> getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(Set<Recomendacion> recomendaciones) {
+        this.recomendaciones = recomendaciones;
     }
 }

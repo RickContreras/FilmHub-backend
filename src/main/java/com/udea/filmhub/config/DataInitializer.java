@@ -26,19 +26,22 @@ public class DataInitializer implements CommandLineRunner {
     private IdiomaRepository idiomaRepository;
 
     @Autowired
-    private ContenidoRepository contenidoRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private GeneroRepository generoRepository;
+    private ContenidoRepository contenidoRepository;
 
     @Autowired
     private EstadoRepository estadoRepository;
 
     @Autowired
-    private UsuarioXContenidoRepository usuarioXContenidoRepository;
+    private RecomendacionRepository recomendacionRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private GeneroRepository generoRepository;
+
+    @Autowired
+    private UsuarioXContenidoRepository usuarioXContenidoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -72,6 +75,10 @@ public class DataInitializer implements CommandLineRunner {
         // Insertar datos de ejemplo en la tabla Usuario
         Usuario usuario = usuarioRepository.save(new Usuario("Juan Perez", "juan.perez@example.com", "password", "avatar.png"));
 
+        // Insertar datos de ejemplo en la tabla Contenido
+        Contenido contenido1 = contenidoRepository.save(new Contenido("Película Ejemplo 1", LocalDate.of(2021, 1, 1), "poster1.png", "Una película de ejemplo 1", 8.5f, 1, 1, pg13, movie, english));
+        Contenido contenido2 = contenidoRepository.save(new Contenido("Película Ejemplo 2", LocalDate.of(2022, 2, 2), "poster2.png", "Una película de ejemplo 2", 7.5f, 1, 1, r, movie, spanish));
+
 
         // Insertar datos de ejemplo en la tabla Contenido
         Contenido contenido = new Contenido("Inception", LocalDate.of(2010, 7, 16), "inception.jpg", "A mind-bending thriller", 8.8f, null, null, pg13, movie, english);
@@ -87,6 +94,14 @@ public class DataInitializer implements CommandLineRunner {
         usuarioXContenido.setIsLiked(true);
         usuarioXContenido.setIsView(true);
         usuarioXContenidoRepository.save(usuarioXContenido);
+
+
+        Recomendacion recomendacion = new Recomendacion(LocalDate.now(), usuario, contenido, visto);
+        recomendacionRepository.save(recomendacion);
+
+        // Crear más recomendaciones si es necesario
+        Recomendacion recomendacion2 = new Recomendacion(LocalDate.now(), usuario, contenido, agregado);
+        recomendacionRepository.save(recomendacion2);
 
 
         // Insertar datos de ejemplo en la tabla Genero

@@ -21,6 +21,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<UsuarioXContenido> contenidos = new HashSet<>();
 
+    @OneToMany(mappedBy = "usuario")
+    private Set<Recomendacion> recomendaciones = new HashSet<>();
+
+
     // Inicialización de fechaRegistro
     @PrePersist
     protected void onCreate() {
@@ -86,6 +90,14 @@ public class Usuario {
 
     public void setContenidos(Set<UsuarioXContenido> contenidos) {
         this.contenidos = contenidos;
+    }
+
+    public Set<Recomendacion> getRecomendaciones() {
+        return recomendaciones;
+    }
+
+    public void setRecomendaciones(Set<Recomendacion> recomendaciones) {
+        this.recomendaciones = recomendaciones;
     }
 
     public Long getId() {
