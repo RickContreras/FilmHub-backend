@@ -27,7 +27,18 @@ public class Recomendacion {
     @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
     
+    @PrePersist
+    protected void onCreate() {
+        this.fechaRecomendacion = LocalDate.now();
+    }
+
     public Recomendacion() {
+    }
+
+    public Recomendacion(Usuario usuario, Contenido contenido, Estado estado) {
+        this.usuario = usuario;
+        this.contenido = contenido;
+        this.estado = estado;
     }
 
     public Recomendacion(LocalDate fechaRecomendacion, Usuario usuario, Contenido contenido, Estado estado) {

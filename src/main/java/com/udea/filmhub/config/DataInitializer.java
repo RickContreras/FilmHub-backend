@@ -75,6 +75,7 @@ public class DataInitializer implements CommandLineRunner {
         Estado visto = estadoRepository.save(new Estado("Visto"));
         Estado eliminado = estadoRepository.save(new Estado("Eliminado"));
         Estado agregado = estadoRepository.save(new Estado("Agregado"));
+        Estado recomendado = estadoRepository.save(new Estado("Recomendado"));
 
         // Insertar datos de ejemplo en la tabla Usuario
         Usuario usuario = usuarioRepository.save(new Usuario("Juan Perez", "juan.perez@example.com", "password", "avatar.png"));
