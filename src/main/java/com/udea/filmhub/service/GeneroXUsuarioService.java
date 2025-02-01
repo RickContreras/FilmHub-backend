@@ -77,4 +77,10 @@ public GeneroXUsuarioResponse addOrReplaceGeneroForUsuario(Long usuarioId, Long 
                 .orElseThrow(() -> new IllegalArgumentException("Relacion Genero-Usuario no encontrada"));
         generoXUsuarioRepository.delete(generoXUsuario);
     }
+
+    public void removeGeneroFromUsuario(Long usuarioId) {
+        GeneroXUsuario generoXUsuario = generoXUsuarioRepository.findByUsuarioId(usuarioId)
+                .orElseThrow(() -> new IllegalArgumentException("Relacion Genero-Usuario no encontrada"));
+        generoXUsuarioRepository.delete(generoXUsuario);
+    }
 }
