@@ -1,5 +1,6 @@
 package com.udea.filmhub.service;
 
+import com.udea.filmhub.dto.ContenidoDTO;
 import com.udea.filmhub.model.Contenido;
 import com.udea.filmhub.model.Estado;
 import com.udea.filmhub.model.Recomendacion;
@@ -35,25 +36,36 @@ public class RecomendacionService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public List<Contenido> recomendarContenido(Long usuarioId) {
+    public List<ContenidoDTO> recomendarContenido(Long usuarioId) {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         Set<UsuarioXContenido> contenidosUsuario = usuario.getContenidos();
 
+        List<Contenido> contenidos;
         if (contenidosUsuario.isEmpty()) {
             // Recomendar contenido basado en los géneros del usuario
             Set<String> generosUsuario = usuario.getGeneros().stream()
                     .map(generoXUsuario -> generoXUsuario.getGenero().getNombre())
                     .collect(Collectors.toSet());
 
-            return contenidoRepository.findByGenerosNombreIn(generosUsuario).stream()
+            contenidos = contenidoRepository.findByGenerosNombreIn(generosUsuario).stream()
                     .limit(5)
                     .collect(Collectors.toList());
         } else {
             // Usar el algoritmo KDA para recomendar contenido similar
-            return recomendarContenidoKDA(contenidosUsuario);
+            contenidos = recomendarContenidoKDA(contenidosUsuario);
         }
+
+        return contenidos.stream()
+                .map(contenido -> new ContenidoDTO(
+                        contenido.getId(),
+                        contenido.getTitulo(),
+                        contenido.getAnioLanzamiento(),
+                        contenido.getPoster(),
+                        contenido.getSinopsis()
+                ))
+                .collect(Collectors.toList());
     }
 
     private List<Contenido> recomendarContenidoKDA(Set<UsuarioXContenido> contenidosUsuario) {

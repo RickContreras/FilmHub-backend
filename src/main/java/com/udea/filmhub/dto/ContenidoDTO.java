@@ -49,6 +49,18 @@ public class ContenidoDTO {
     @Schema(description = "Idioma original del contenido", example = "English")
     private String idiomaOriginal;
 
+
+    public ContenidoDTO() {}
+
+    public ContenidoDTO(Long id, String titulo, LocalDate anioLanzamiento, String poster, String sinopsis) {
+        this.id = id;
+        this.titulo = titulo;
+        this.anioLanzamiento = anioLanzamiento;
+        this.poster = poster;
+        this.sinopsis = sinopsis;
+    }
+
+
     // Getters y Setters
     public Long getId() {
         return id;
