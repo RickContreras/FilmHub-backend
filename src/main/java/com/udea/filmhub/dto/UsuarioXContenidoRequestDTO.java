@@ -15,8 +15,8 @@ public class UsuarioXContenidoRequestDTO {
     private Long contenidoId;
 
     @NotNull
-    @Schema(description = "ID del estado del contenido", example = "1")
-    private Long estadoId;
+    @Schema(description = "Nombre del estado del contenido", example = "Visto")
+    private String estadoNombre;
 
     @Schema(description = "Indica si el contenido fue marcado como 'me gusta'", example = "true")
     private Boolean isLiked;
@@ -41,12 +41,12 @@ public class UsuarioXContenidoRequestDTO {
         this.contenidoId = contenidoId;
     }
 
-    public Long getEstadoId() {
-        return estadoId;
+    public String getEstadoNombre() {
+        return estadoNombre;
     }
 
-    public void setEstadoId(Long estadoId) {
-        this.estadoId = estadoId;
+    public void setEstadoNombre(String estadoNombre) {
+        this.estadoNombre = estadoNombre;
     }
 
     public Boolean getIsLiked() {

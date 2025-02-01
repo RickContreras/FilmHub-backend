@@ -12,6 +12,9 @@ import com.udea.filmhub.repository.UsuarioRepository;
 import com.udea.filmhub.repository.UsuarioXContenidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +50,7 @@ public class UsuarioXContenidoService {
         Contenido contenido = contenidoRepository.findById(dto.getContenidoId())
                 .orElseThrow(() -> new IllegalArgumentException("Contenido no encontrado"));
 
-        Estado estado = estadoRepository.findById(dto.getEstadoId())
+        Estado estado = estadoRepository.findByNombre(dto.getEstadoNombre())
                 .orElseThrow(() -> new IllegalArgumentException("Estado no encontrado"));
 
         UsuarioXContenido usuarioXContenido = new UsuarioXContenido();
@@ -61,10 +64,38 @@ public class UsuarioXContenidoService {
         return convertToResponseDTO(savedEntity);
     }
 
+    // Añadir un contenido a un usuario con valores predeterminados
+    public UsuarioXContenidoResponseDTO addContenidoToUsuarioDefault(Long idUsuario, Long idContenido) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        Contenido contenido = contenidoRepository.findById(idContenido)
+                .orElseThrow(() -> new IllegalArgumentException("Contenido no encontrado"));
+
+        Estado estado = estadoRepository.findByNombre("Agregado")
+                .orElseThrow(() -> new IllegalArgumentException("Estado 'Agregado' no encontrado"));
+
+        UsuarioXContenido usuarioXContenido = new UsuarioXContenido();
+        usuarioXContenido.setUsuario(usuario);
+        usuarioXContenido.setContenido(contenido);
+        usuarioXContenido.setEstado(estado);
+        usuarioXContenido.setIsLiked(false);
+        usuarioXContenido.setIsView(false);
+
+        UsuarioXContenido savedEntity = repository.save(usuarioXContenido);
+        return convertToResponseDTO(savedEntity);
+    }
+
     // Eliminar la relación de contenido con usuario
     public void removeContenidoFromUsuario(Long id) {
         Optional<UsuarioXContenido> usuarioXContenido = repository.findById(id);
         usuarioXContenido.ifPresent(repository::delete);
+    }
+
+    // Eliminar la relación de contenido con usuario por IDs
+    @Transactional
+    public void removeContenidoFromUsuario(Long idUsuario, Long idContenido) {
+        repository.deleteByUsuarioIdAndContenidoId(idUsuario, idContenido);
     }
 
     // Convertir UsuarioXContenido a UsuarioXContenidoResponseDTO
@@ -72,9 +103,9 @@ public class UsuarioXContenidoService {
         UsuarioXContenidoResponseDTO dto = new UsuarioXContenidoResponseDTO();
         dto.setId(usuarioXContenido.getId());
         dto.setUsuarioId(usuarioXContenido.getUsuario().getId());
-        dto.setNombreUsuario(usuarioXContenido.getUsuario().getNombre());  // Asumiendo que la clase Usuario tiene un campo 'nombre'
+        dto.setNombreUsuario(usuarioXContenido.getUsuario().getNombre());
         dto.setContenidoId(usuarioXContenido.getContenido().getId());
-        dto.setNombreContenido(usuarioXContenido.getContenido().getTitulo());  // Asumiendo que la clase Contenido tiene un campo 'nombre'
+        dto.setNombreContenido(usuarioXContenido.getContenido().getTitulo());
         dto.setFechaAgregado(usuarioXContenido.getFechaAgregado());
         dto.setIsView(usuarioXContenido.getIsView());
         dto.setIsLiked(usuarioXContenido.getIsLiked());
