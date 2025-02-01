@@ -1,6 +1,6 @@
 package com.udea.filmhub.controller;
 
-import com.udea.filmhub.model.Genero;
+import com.udea.filmhub.dto.GeneroDTO;
 import com.udea.filmhub.service.GeneroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,8 +21,8 @@ public class GeneroController {
 
     @GetMapping
     @Operation(summary = "Obtener todos los géneros", description = "Devuelve una lista de todos los géneros")
-    public ResponseEntity<List<Genero>> getAllGeneros() {
-        List<Genero> generos = generoService.getAllGeneros();
+    public ResponseEntity<List<GeneroDTO>> getAllGeneros() {
+        List<GeneroDTO> generos = generoService.getAllGeneros();
         return ResponseEntity.ok(generos);
     }
 }
