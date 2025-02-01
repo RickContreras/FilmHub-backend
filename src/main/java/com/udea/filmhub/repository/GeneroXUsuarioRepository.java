@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface GeneroXUsuarioRepository extends JpaRepository<GeneroXUsuario, Long> {
     Optional<GeneroXUsuario> findByUsuarioIdAndGeneroId(Long usuarioId, Long generoId);
     Optional<GeneroXUsuario> findByUsuarioId(Long usuarioId);
+    Optional<GeneroXUsuario> findByUsuario_Id(Long usuarioId);
 }

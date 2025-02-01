@@ -25,4 +25,11 @@ public class GeneroController {
         List<GeneroDTO> generos = generoService.getAllGeneros();
         return ResponseEntity.ok(generos);
     }
+
+    @GetMapping("/usuario/{idUsuario}")
+    @Operation(summary = "Obtener género por usuario", description = "Devuelve el género asignado a un usuario o null si no tiene uno")
+    public ResponseEntity<GeneroDTO> getGeneroByUsuario(@PathVariable Long idUsuario) {
+        GeneroDTO genero = generoService.getGeneroByUsuario(idUsuario);
+        return ResponseEntity.ok(genero);
+    }
 }
