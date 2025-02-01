@@ -20,21 +20,12 @@ public class UsuarioXContenidoController {
     @Autowired
     private UsuarioXContenidoService service;
 
-
-    //TODO: Este metodo deberia pertener a contenido para /contenido/usuario/{usuarioId}
-    @Operation(summary = "Obtiene los contenidos asociados a un usuario")
-    @GetMapping("/usuario/{usuarioId}")
-    public List<UsuarioXContenidoResponseDTO> getContenidoByUsuario(@PathVariable Long usuarioId) {
-        return service.getContenidosByUsuario(usuarioId);
-    }
-
     @Operation(summary = "Añade la relacion de un contenido a un usuario de forma personalizada")
     @PostMapping
     public UsuarioXContenidoResponseDTO addContenidoToUsuario(@Valid @RequestBody UsuarioXContenidoRequestDTO dto) {
         return service.addContenidoToUsuario(dto);
     }
 
-    
     @Operation(summary = "Elimina la relación numero id de acuerdo a como se haya guardado")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeContenidoFromUsuario(@PathVariable Long id) {
@@ -54,4 +45,6 @@ public class UsuarioXContenidoController {
         service.removeContenidoFromUsuario(idUsuario, idContenido);
         return ResponseEntity.noContent().build();
     }
+
+    //TODO: Se podria pensar en implementar un metodo para cambiar el estado, el like y/o el view de una relacion.
 }

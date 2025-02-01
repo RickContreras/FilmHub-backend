@@ -32,14 +32,6 @@ public class UsuarioXContenidoService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    // Obtener los contenidos asociados a un usuario
-    public List<UsuarioXContenidoResponseDTO> getContenidosByUsuario(Long usuarioId) {
-        List<UsuarioXContenido> relaciones = repository.findByUsuarioId(usuarioId);
-        return relaciones.stream()
-                .map(this::convertToResponseDTO)
-                .collect(Collectors.toList());
-    }
-
     // Añadir un contenido a un usuario
     public UsuarioXContenidoResponseDTO addContenidoToUsuario(UsuarioXContenidoRequestDTO dto) {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
