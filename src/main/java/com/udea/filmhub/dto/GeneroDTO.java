@@ -1,6 +1,8 @@
 package com.udea.filmhub.dto;
 
 public class GeneroDTO {
+    
+    //En general no deberia ir el id en el DTO, pero para efectos de este ejemplo lo dejaremos
     private Long id;
     private String nombre;
 
