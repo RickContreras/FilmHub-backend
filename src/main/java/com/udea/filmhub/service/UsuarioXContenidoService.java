@@ -13,8 +13,6 @@ import com.udea.filmhub.repository.UsuarioXContenidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -109,6 +107,7 @@ public class UsuarioXContenidoService {
         dto.setFechaAgregado(usuarioXContenido.getFechaAgregado());
         dto.setIsView(usuarioXContenido.getIsView());
         dto.setIsLiked(usuarioXContenido.getIsLiked());
+        dto.setEstado(usuarioXContenido.getEstado().getNombre());
         return dto;
     }
 }

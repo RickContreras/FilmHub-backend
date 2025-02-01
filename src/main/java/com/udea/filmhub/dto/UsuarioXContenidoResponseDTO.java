@@ -30,6 +30,9 @@ public class UsuarioXContenidoResponseDTO {
     @Schema(description = "Indica si el contenido fue marcado como 'me gusta'", example = "true")
     private Boolean isLiked;
 
+    @Schema(description = "Estado de la relación", example = "Agregado")
+    private String estado;
+
     // Getters y setters
     public Long getId() {
         return id;
@@ -93,5 +96,13 @@ public class UsuarioXContenidoResponseDTO {
 
     public void setIsLiked(Boolean isLiked) {
         this.isLiked = isLiked;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
