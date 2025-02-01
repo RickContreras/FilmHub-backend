@@ -27,14 +27,12 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private Set<GeneroXUsuario> generos = new HashSet<>();
 
-
     // Inicialización de fechaRegistro
     @PrePersist
     protected void onCreate() {
         this.fechaRegistro = LocalDate.now();
     }
 
-    
     //Constructors
     public Usuario() {}
 
@@ -44,7 +42,6 @@ public class Usuario {
         this.contrasena = contrasena;
         this.avatar = avatar;
     }
-    
     
     // Getters and Setters
     public String getNombre() {

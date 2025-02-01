@@ -12,5 +12,4 @@ public interface ContenidoRepository extends JpaRepository<Contenido, Long> {
     List<Contenido> findByTipoContenidoNombre(String nombre);
     List<Contenido> findByIdiomaOriginalNombre(String nombre);
     List<Contenido> findByGenerosNombreIn(Set<String> generos);
-
 }

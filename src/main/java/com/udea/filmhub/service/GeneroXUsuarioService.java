@@ -70,7 +70,7 @@ public GeneroXUsuarioResponse addOrReplaceGeneroForUsuario(Long usuarioId, Long 
     generoXUsuarioRepository.save(generoXUsuario);
 
     return new GeneroXUsuarioResponse(usuario.getId(), usuario.getNombre(), genero.getId(), genero.getNombre());
-}
+    }
 
     public void removeGeneroFromUsuario(Long usuarioId, Long generoId) {
         GeneroXUsuario generoXUsuario = generoXUsuarioRepository.findByUsuarioIdAndGeneroId(usuarioId, generoId)

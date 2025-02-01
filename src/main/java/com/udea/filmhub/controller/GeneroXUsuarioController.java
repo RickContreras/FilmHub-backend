@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-
-
 @RestController
 @RequestMapping("/GeneroUsuario")
 @CrossOrigin(origins = "*")
@@ -24,6 +22,13 @@ public class GeneroXUsuarioController {
     public ResponseEntity<GeneroXUsuarioResponse> addOrReplaceGeneroForUsuario(@PathVariable Long idUsuario, @RequestBody String generoNombre) {
         GeneroXUsuarioResponse response = generoXUsuarioService.addOrReplaceGeneroForUsuario(idUsuario, generoNombre);
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Elimina un género de un usuario")
+    @DeleteMapping("/usuario/{idUsuario}")
+    public ResponseEntity<Void> removeGeneroFromUsuario(@PathVariable Long idUsuario) {
+        generoXUsuarioService.removeGeneroFromUsuario(idUsuario);
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Añade o reemplaza un género para un usuario usando IDs")
