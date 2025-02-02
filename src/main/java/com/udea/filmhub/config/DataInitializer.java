@@ -130,9 +130,23 @@ public class DataInitializer implements CommandLineRunner {
 
         // Guardar contenidos en la base de datos
         for (Contenido contenido : contenidos) {
+            
+            List<Genero> generos = generoRepository.findAll();
+            if (!generos.isEmpty()) {
+                Genero generoAleatorio = generos.get((int) (Math.random() * generos.size()));
+                contenido.getGeneros().add(generoAleatorio);
+            }
+        
             contenido.setClasificacion(pg13); // Asignar una clasificación por defecto
             contenido.setTipoContenido(movie); // Asignar un tipo de contenido por defecto
             contenido.setIdiomaOriginal(english); // Asignar un idioma por defecto
+            contenido.setNumTotalEpisodios(1); // Asignar un número total de episodios por defecto
+            contenido.setNumTotalTemporadas(1); // Asignar un número total de temporadas por defecto
+            
+            // Asignar generos aleatoriamente
+
+
+
             contenidoRepository.save(contenido);
         }
     }
