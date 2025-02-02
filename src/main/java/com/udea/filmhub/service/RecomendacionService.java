@@ -87,7 +87,7 @@ public class RecomendacionService {
 
         return similitudes.entrySet().stream()
                 .sorted(Map.Entry.<Contenido, Double>comparingByValue().reversed())
-                .limit(5)
+                .limit(20)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
