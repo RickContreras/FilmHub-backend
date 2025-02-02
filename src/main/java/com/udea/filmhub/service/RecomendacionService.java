@@ -106,11 +106,15 @@ public class RecomendacionService {
 
     private double calcularDistanciaCoseno(Contenido c1, Contenido c2) {
         // Implementa la lógica para calcular la distancia coseno entre dos contenidos
-        // Este es un ejemplo básico
-        double dotProduct = c1.getTitulo().length() * c2.getTitulo().length(); // Ejemplo simple
-        double magnitude1 = Math.sqrt(c1.getTitulo().length());
-        double magnitude2 = Math.sqrt(c2.getTitulo().length());
-        return dotProduct / (magnitude1 * magnitude2);
+        double sinopsisLength1 = c1.getSinopsis().length();
+        double sinopsisLength2 = c2.getSinopsis().length();
+        double tituloLength1 = c1.getTitulo().length();
+        double tituloLength2 = c2.getTitulo().length();
+        double dotProduct = (sinopsisLength1 * sinopsisLength2) + (tituloLength1 * tituloLength2);
+        double magnitude1 = Math.sqrt((sinopsisLength1 * sinopsisLength1) + (tituloLength1 * tituloLength1));
+        double magnitude2 = Math.sqrt((sinopsisLength2 * sinopsisLength2) + (tituloLength2 * tituloLength2));
+    
+        return (dotProduct / (magnitude1 * magnitude2));
     }
 
     public void guardarRecomendaciones(Long usuarioId, List<Contenido> contenidos) {
@@ -119,6 +123,9 @@ public class RecomendacionService {
 
         Estado estado = estadoRepository.findByNombre("Agregado")
                 .orElseThrow(() -> new IllegalArgumentException("Estado 'Agregado' no encontrado"));
+
+        // Eliminar recomendaciones existentes
+        recomendacionRepository.deleteByUsuarioId(usuarioId);
 
         List<Recomendacion> recomendaciones = contenidos.stream()
                 .map(contenido -> new Recomendacion(usuario, contenido, estado))
