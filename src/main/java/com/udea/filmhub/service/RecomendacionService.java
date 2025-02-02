@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
 
 @Service
 public class RecomendacionService {
@@ -67,12 +69,48 @@ public class RecomendacionService {
                 .collect(Collectors.toList());
     }
 
+    //Para otras implementaciones se podria usar las siguientes bibliotecas: Apache Commons Math, Smile, Weka, etc.
+
     private List<Contenido> recomendarContenidoKDA(Set<UsuarioXContenido> contenidosUsuario) {
-        // Implementa el algoritmo KDA aquí
-        // Por simplicidad, vamos a devolver los primeros 5 contenidos
-        return contenidoRepository.findAll().stream()
-                .limit(5)
+        List<Contenido> todosLosContenidos = contenidoRepository.findAll();
+        List<Contenido> contenidosUsuarioList = contenidosUsuario.stream()
+                .map(UsuarioXContenido::getContenido)
                 .collect(Collectors.toList());
+
+        Map<Contenido, Double> similitudes = new HashMap<>();
+
+        for (Contenido contenido : todosLosContenidos) {
+            if (!contenidosUsuarioList.contains(contenido)) {
+                double similitud = calcularSimilitud(contenidosUsuarioList, contenido);
+                similitudes.put(contenido, similitud);
+            }
+        }
+
+        return similitudes.entrySet().stream()
+                .sorted(Map.Entry.<Contenido, Double>comparingByValue().reversed())
+                .limit(5)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    private double calcularSimilitud(List<Contenido> contenidosUsuario, Contenido contenido) {
+        // Implementa la lógica para calcular la similitud entre los contenidos
+        // Aquí puedes usar la distancia coseno, euclidiana, etc.
+        // Este es un ejemplo básico usando la distancia coseno
+        double similitud = 0.0;
+        for (Contenido c : contenidosUsuario) {
+            similitud += calcularDistanciaCoseno(c, contenido);
+        }
+        return similitud / contenidosUsuario.size();
+    }
+
+    private double calcularDistanciaCoseno(Contenido c1, Contenido c2) {
+        // Implementa la lógica para calcular la distancia coseno entre dos contenidos
+        // Este es un ejemplo básico
+        double dotProduct = c1.getTitulo().length() * c2.getTitulo().length(); // Ejemplo simple
+        double magnitude1 = Math.sqrt(c1.getTitulo().length());
+        double magnitude2 = Math.sqrt(c2.getTitulo().length());
+        return dotProduct / (magnitude1 * magnitude2);
     }
 
     public void guardarRecomendaciones(Long usuarioId, List<Contenido> contenidos) {
