@@ -78,7 +78,6 @@ public class DataInitializer implements CommandLineRunner {
         generoRepository.save(new Genero("Misterio"));
         generoRepository.save(new Genero("Documental"));
 
-
         // Insertar datos de ejemplo en la tabla Estado
         Estado visto = estadoRepository.save(new Estado("Visto"));
         Estado eliminado = estadoRepository.save(new Estado("Eliminado"));
@@ -88,11 +87,6 @@ public class DataInitializer implements CommandLineRunner {
 
         // Insertar datos de ejemplo en la tabla Usuario
         Usuario usuario = usuarioRepository.save(new Usuario("Juan Perez", "juan.perez@example.com", "password", "avatar.png"));
-
-        // Insertar datos de ejemplo en la tabla Contenido
-        Contenido contenido1 = contenidoRepository.save(new Contenido("Película Ejemplo 1", LocalDate.of(2021, 1, 1), "poster1.png", "Una película de ejemplo 1", 8.5f, 1, 1, pg13, movie, english));
-        Contenido contenido2 = contenidoRepository.save(new Contenido("Película Ejemplo 2", LocalDate.of(2022, 2, 2), "poster2.png", "Una película de ejemplo 2", 7.5f, 1, 1, r, movie, spanish));
-
 
         // Insertar datos de ejemplo en la tabla Contenido
         Contenido contenido3 = new Contenido("Inception", LocalDate.of(2010, 7, 16), "inception.jpg", "A mind-bending thriller", 8.8f, null, null, pg13, movie, english);
@@ -108,7 +102,6 @@ public class DataInitializer implements CommandLineRunner {
         usuarioXContenido.setIsLiked(true);
         usuarioXContenido.setIsView(true);
         usuarioXContenidoRepository.save(usuarioXContenido);
-
 
         Recomendacion recomendacion = new Recomendacion(LocalDate.now(), usuario, contenido3, visto);
         recomendacionRepository.save(recomendacion);
@@ -142,11 +135,6 @@ public class DataInitializer implements CommandLineRunner {
             contenido.setIdiomaOriginal(english); // Asignar un idioma por defecto
             contenido.setNumTotalEpisodios(1); // Asignar un número total de episodios por defecto
             contenido.setNumTotalTemporadas(1); // Asignar un número total de temporadas por defecto
-            
-            // Asignar generos aleatoriamente
-
-
-
             contenidoRepository.save(contenido);
         }
     }

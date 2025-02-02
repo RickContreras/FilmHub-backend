@@ -70,7 +70,6 @@ public class RecomendacionService {
     }
 
     //Para otras implementaciones se podria usar las siguientes bibliotecas: Apache Commons Math, Smile, Weka, etc.
-
     private List<Contenido> recomendarContenidoKDA(Set<UsuarioXContenido> contenidosUsuario) {
         List<Contenido> todosLosContenidos = contenidoRepository.findAll();
         List<Contenido> contenidosUsuarioList = contenidosUsuario.stream()

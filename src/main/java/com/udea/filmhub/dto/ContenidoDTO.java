@@ -49,7 +49,6 @@ public class ContenidoDTO {
     @Schema(description = "Idioma original del contenido", example = "English")
     private String idiomaOriginal;
 
-
     public ContenidoDTO() {}
 
     public ContenidoDTO(Long id, String titulo, LocalDate anioLanzamiento, String poster, String sinopsis) {
@@ -59,7 +58,6 @@ public class ContenidoDTO {
         this.poster = poster;
         this.sinopsis = sinopsis;
     }
-
 
     // Getters y Setters
     public Long getId() {
