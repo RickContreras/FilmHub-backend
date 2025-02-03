@@ -19,7 +19,6 @@ public class Estado {
     @OneToMany(mappedBy = "estado")
     private Set<Recomendacion> recomendaciones = new HashSet<>();
 
-
     public Estado() {
     }
 

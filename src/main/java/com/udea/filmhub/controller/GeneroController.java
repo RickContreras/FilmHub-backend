@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -24,5 +23,12 @@ public class GeneroController {
     public ResponseEntity<List<GeneroDTO>> getAllGeneros() {
         List<GeneroDTO> generos = generoService.getAllGeneros();
         return ResponseEntity.ok(generos);
+    }
+
+    @GetMapping("/usuario/{idUsuario}")
+    @Operation(summary = "Obtener género por usuario", description = "Devuelve el género asignado a un usuario o null si no tiene uno")
+    public ResponseEntity<GeneroDTO> getGeneroByUsuario(@PathVariable Long idUsuario) {
+        GeneroDTO genero = generoService.getGeneroByUsuario(idUsuario);
+        return ResponseEntity.ok(genero);
     }
 }

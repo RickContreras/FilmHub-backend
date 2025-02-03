@@ -19,7 +19,6 @@ public class Genero {
     @OneToMany(mappedBy = "genero")
     private Set<GeneroXUsuario> usuarios = new HashSet<>();
 
-
     public Genero() {
     }
 
