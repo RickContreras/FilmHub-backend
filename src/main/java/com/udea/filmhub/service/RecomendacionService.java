@@ -51,7 +51,7 @@ public class RecomendacionService {
                     .collect(Collectors.toSet());
 
             contenidos = contenidoRepository.findByGenerosNombreIn(generosUsuario).stream()
-                    .limit(5)
+                    .limit(20)
                     .collect(Collectors.toList());
         } else {
             // Usar el algoritmo KDA para recomendar contenido similar

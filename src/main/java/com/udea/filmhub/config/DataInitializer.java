@@ -87,29 +87,7 @@ public class DataInitializer implements CommandLineRunner {
 
         // Insertar datos de ejemplo en la tabla Usuario
         Usuario usuario = usuarioRepository.save(new Usuario("Juan Perez", "juan.perez@example.com", "password", "avatar.png"));
-
-        // Insertar datos de ejemplo en la tabla Contenido
-        Contenido contenido3 = new Contenido("Inception", LocalDate.of(2010, 7, 16), "inception.jpg", "A mind-bending thriller", 8.8f, null, null, pg13, movie, english);
-        contenido3.getGeneros().add(accion);
-        contenido3.getGeneros().add(drama);
-        contenidoRepository.save(contenido3);
-
-        // Insertar datos de ejemplo en la tabla UsuarioXContenido
-        UsuarioXContenido usuarioXContenido = new UsuarioXContenido();
-        usuarioXContenido.setUsuario(usuario);
-        usuarioXContenido.setContenido(contenido3);
-        usuarioXContenido.setEstado(visto);
-        usuarioXContenido.setIsLiked(true);
-        usuarioXContenido.setIsView(true);
-        usuarioXContenidoRepository.save(usuarioXContenido);
-
-        Recomendacion recomendacion = new Recomendacion(LocalDate.now(), usuario, contenido3, visto);
-        recomendacionRepository.save(recomendacion);
-
-        // Crear más recomendaciones si es necesario
-        Recomendacion recomendacion2 = new Recomendacion(LocalDate.now(), usuario, contenido3, agregado);
-        recomendacionRepository.save(recomendacion2);
-
+        
         // Insertar datos de ejemplo en la tabla GeneroXUsuario
         GeneroXUsuario generoXUsuario1 = new GeneroXUsuario(usuario, accion);
         generoXUsuarioRepository.save(generoXUsuario1);
