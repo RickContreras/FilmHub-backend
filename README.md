@@ -20,9 +20,9 @@ Una aplicación **REST API** robusta creada con **Spring Boot** para gestionar c
 - [📦 Dependencias Principales](#-dependencias-principales)
 - [🔧 Configuración de Entorno](#-configuración-de-entorno)
   - [Azure SQL Database](#azure-sql-database)
+    -  [🏗️ Creación de la Infraestructura](#️-creación-de-la-infraestructura)
+    - [💥 Destrucción de la Infraestructura](#-destrucción-de-la-infraestructura)
   - [PostgreSQL](#postgresql)
-- [🏗️ Creación de la Infraestructura](#️-creación-de-la-infraestructura)
-- [💥 Destrucción de la Infraestructura](#-destrucción-de-la-infraestructura)
 - [🚀 Compilación y Ejecución del Proyecto](#-compilación-y-ejecución-del-proyecto)
 - [🧪 Pruebas](#-pruebas)
 - [📡 Endpoints](#-endpoints)
@@ -64,9 +64,9 @@ src/
 │   │   └── com/
 │   │       └── udea/
 │   │           └── filmhub/
+│   │               ├── config/
 │   │               ├── controller/
 |   |               ├── dto/
-|   |               ├── config/
 │   │               ├── exceptions/
 │   │               ├── model/
 │   │               ├── repository/
@@ -80,30 +80,30 @@ src/
 │       └── application.properties
 └── test/
 ```
-(🚧 Por actualizar)
-
-Nota: Poner la carpeta de los dtos y config.
 
 ### 📂 Descripción de carpetas
 
-1. **`controller/`**: Controladores REST que manejan las peticiones HTTP y definen los endpoints de la API.
-2. **`model/`**: Entidades JPA que representan las tablas en la base de datos.
-3. **`repository/`**: Interfaces que extienden `JpaRepository` para operaciones CRUD.
-4. **`service/`**: Implementación de la lógica de negocio.
-5. **`exceptions/`**: Manejo personalizado de excepciones.
-6. **`resources/`**: Archivos de configuración y recursos estáticos.
-7. **`test/`**: Pruebas unitarias e integración.
-
-(🚧 Por actualizar)
+1. **`config/`**: Configuraciones de la aplicación, como seguridad, CORS, y otros ajustes específicos.
+2. **`controller/`**: Controladores REST que manejan las peticiones HTTP y definen los endpoints de la API.
+3. **`dto/`**: Objetos de transferencia de datos utilizados para mover datos entre las capas de la aplicación.
+4. **`exceptions/`**: Manejo personalizado de excepciones.
+5. **`model/`**: Entidades JPA que representan las tablas en la base de datos.
+6. **`repository/`**: Interfaces que extienden `JpaRepository` para operaciones CRUD.
+7. **`service/`**: Implementación de la lógica de negocio.
+8. **`resources/`**: Archivos de configuración y recursos estáticos.
+9. **`test/`**: Pruebas unitarias e integración.
 
 ## 📦 Dependencias Principales
 
-- **Spring Boot Starter Web**: Configuración para aplicaciones web y REST.
+- **Spring Boot Starter Web**: Proporciona las bibliotecas necesarias para construir aplicaciones web y RESTful.
 - **Spring Boot Starter Data JPA**: Integración con JPA y Hibernate.
 - **Microsoft SQL Server JDBC Driver**: Conector para Azure SQL Database.
 - **PostgreSQL Driver**: Conector para PostgreSQL.
-- **Lombok**(🚧 Por implementar): Reduce el boilerplate en el código Java.
+- **Spring Boot Starter Data JDBC**: Proporciona soporte para JDBC, simplificando el acceso a bases de datos relacionales.
+- **Spring Cloud Azure Starter**: Proporciona integración con los servicios de Azure
 - **Spring Boot Starter Test**: Soporte para pruebas unitarias e integración.
+- **Springdoc OpenAPI Starter WebMVC UI**:Proporciona integración con OpenAPI para la documentación de la API.
+- **Jackson Datatype JSR310**: Añade soporte para tipos de datos de Java 8 y manejo de json.
 
 ## 🔧 Configuración de Entorno
 
@@ -113,7 +113,6 @@ Nota: Poner la carpeta de los dtos y config.
     git clone https://github.com/RickContreras/FilmHub-backend.git
     cd FilmHub-backend
 ```
-
 
 ### Azure SQL Database
 
@@ -131,13 +130,30 @@ export AZ_SQL_SERVER_USERNAME=spring
 export AZ_SQL_SERVER_PASSWORD=XXXXXXXXXXXXXXXXXX
 export AZ_LOCAL_IP_ADDRESS=$(curl -s https://api.ipify.org)
 
-export SPRING_DATASOURCE_URL="jdbc:sqlserver://$AZ_DATABASE_NAME.database.windows.net:1433;database=demo;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-export SPRING_DATASOURCE_USERNAME=spring@$AZ_DATABASE_NAME
+export SPRING_DATASOURCE_URL="jdbc:sqlserver://$AZ_DATABASE_NAME.database.windows.net:1433;database=demo;user=$SPRING_DATASOURCE_USERNAME;password=$SPRING_DATASOURCE_PASSWORD;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
 export SPRING_DATASOURCE_PASSWORD=$AZ_SQL_SERVER_PASSWORD
+export SPRING_DATASOURCE_USERNAME=spring@$AZ_DATABASE_NAME
 ```
 
 2. Configura un `AZ_DATABASE_NAME` único y una `AZ_SQL_SERVER_PASSWORD` segura.
 
+#### 🏗️ Creación de la Infraestructura
+
+Para Azure SQL Database:
+
+```sh
+az login
+source env.sh
+./deploy-database.sh
+```
+
+#### 💥 Destrucción de la Infraestructura
+
+Para eliminar la infraestructura de Azure:
+
+```sh
+./destroy-all.sh
+```
 
 ### PostgreSQL
 
@@ -156,39 +172,6 @@ spring.datasource.username=tu_usuario
 spring.datasource.password=tu_contraseña
 ```
 
-## 🏗️ Creación de la Infraestructura
-
-Para Azure SQL Database:
-
-```sh
-az login
-az extension add --name serviceconnector-passwordless --upgrade
-source env.sh
-./create-spring-data-jpa-sql-server.sh
-```
-
-Crear usuario no administrador:
-
-```sh
-az connection create sql \
---resource-group $AZ_RESOURCE_GROUP \
---connection sql_conn \
---target-resource-group $AZ_RESOURCE_GROUP \
---server $AZ_DATABASE_NAME \
---database demo \
---user-account \
---query authInfo.userName \
---output tsv
-```
-
-## 💥 Destrucción de la Infraestructura
-
-Para eliminar la infraestructura de Azure:
-
-```sh
-./destroy-spring-data-jpa-sql-server.sh
-```
-
 ## 🚀 Compilación y Ejecución del Proyecto
 
 ```sh
@@ -200,13 +183,20 @@ O usa el botón para abrir en GitHub Codespaces y ejecutalos para trabajar con P
 
 [![Abrir en Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?template_repository=RickContreras/filmhub-backend)
 
-Nota: Si desea usar swagger en codespaces cambien lo siguiente en 'application-dev.properties'
+### Nota
 
- ```sh
+* Para usar Swagger en Codespaces, realice los siguientes cambios en `application-dev.properties`:
+
+```properties
 swagger.server.url=https://la-url-de-su-codespace-8080.app.github.dev/api
 ```
 
-Ademas ponga el puerto 8080 en "Publico" y en "http".
+Además, asegúrese de configurar el puerto 8080 como "Público" y en "http".
+
+* Si esta trabajando con variables de entorno, se tiene que ejecutar las variables de entorno cada vez que se vuelva activar el codespace.
+```sh
+source env.sh
+```
 
 ## 🧪 Pruebas
 
@@ -215,28 +205,18 @@ Ejecuta las pruebas con:
 ```sh
 ./mvnw test
 ```
-(🚧 En desarrollo)
+> 🚧 En desarrollo
 
 ## 📡 Endpoints
 Todos los endpoints inician con ´/api´:
 
-| Método | Endpoint                          | Descripción |
-|--------|-----------------------------------|-------------|
-| GET    | `/contenidos`                     | Obtiene todos los contenidos |
-| GET    | `/contenidos/{id}`                | Obtiene un contenido por ID |
-| POST   | `/contenidos`                     | Crea un nuevo contenido |
-| DELETE | `/contenidos/{id}`                | Elimina un contenido por ID |
-| GET    | `/contenidos/usuario/{usuarioId}` | Obtiene los contenidos de un usuario |
-| POST   | `/contenidousuario`               | Añade un contenido a un usuario |
-| DELETE | `/contenidousuario/{id}`          | Elimina la relación de un contenido con un usuario |
-| GET    | `/usuarios`                       | Obtiene todos los usuarios |
-| POST   | `/usuarios`                       | Crea un nuevo usuario |
-| GET    | `/usuarios/correo/{correo}`       | Obtiene un usuario por correo |
-| GET    | `/usuarios/{id}`                  | Obtiene un usuario por ID |
-| DELETE | `/usuarios/{id}`                  | Elimina un usuario por ID |
-| GET    | `/saludar`                        | Saluda con "Hola Mundo!" |
+![Swagger](src/main/resources/static/API.png)
 
-(🚧 En desarrollo)
+Para ver el Swagger anterior con más detalle, use:
+```
+https://la-url/api/swagger-ui/index.html # o 
+https://la-url/api/swagger-ui.html
+```
 
 ## 🤝 Contribuir
 
@@ -257,7 +237,7 @@ Actualmente, este proyecto no implementa medidas de seguridad. Para un entorno d
 - **HTTPS** para encriptación de datos en tránsito.
 - Implementar buenas prácticas como validación de entrada, manejo seguro de errores, y protección contra ataques comunes (CSRF, XSS, etc.).
 
-(🚧 En desarrollo)
----
+> (🚧 En desarrollo)
 
+---
 Desarrollado con ❤️ por el equipo de Filmhub
