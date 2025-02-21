@@ -123,16 +123,35 @@ src/
 
 echo "Estableciendo variables de entorno"
 
-export AZ_RESOURCE_GROUP=filmhub-backend
-export AZ_DATABASE_NAME=filmhub-server
+# Nombre del grupo de recursos en Azure
+export AZ_RESOURCE_GROUP=filmhub
+
+# Nombre del servidor de la base de datos en Azure
+export AZ_DATABASE_SERVER_NAME=servidorfilmhub
+
+# Nombre de la base de datos en Azure
+export AZ_DATABASE_NAME=demo
+
+# Ubicación de la base de datos en Azure
 export AZ_LOCATION=australiaeast
+
+# Nombre de usuario para la base de datos SQL en Azure
 export AZ_SQL_SERVER_USERNAME=spring
-export AZ_SQL_SERVER_PASSWORD=XXXXXXXXXXXXXXXXXX
+
+# Contraseña para la base de datos SQL en Azure
+export AZ_SQL_SERVER_PASSWORD=XXXXXXXXXXX
+
+# Obtener la dirección IP local
 export AZ_LOCAL_IP_ADDRESS=$(curl -s https://api.ipify.org)
 
-export SPRING_DATASOURCE_URL="jdbc:sqlserver://$AZ_DATABASE_NAME.database.windows.net:1433;database=demo;user=$SPRING_DATASOURCE_USERNAME;password=$SPRING_DATASOURCE_PASSWORD;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+# Nombre de usuario para la fuente de datos de Spring
+export SPRING_DATASOURCE_USERNAME=$AZ_SQL_SERVER_USERNAME@$AZ_DATABASE_SERVER_NAME
+
+# Contraseña para la fuente de datos de Spring
 export SPRING_DATASOURCE_PASSWORD=$AZ_SQL_SERVER_PASSWORD
-export SPRING_DATASOURCE_USERNAME=spring@$AZ_DATABASE_NAME
+
+# URL de la fuente de datos de Spring
+export SPRING_DATASOURCE_URL="jdbc:sqlserver://$AZ_DATABASE_SERVER_NAME.database.windows.net:1433;database=$AZ_DATABASE_NAME;user=$SPRING_DATASOURCE_USERNAME;password=$SPRING_DATASOURCE_PASSWORD;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
 ```
 
 2. Configura un `AZ_DATABASE_NAME` único y una `AZ_SQL_SERVER_PASSWORD` segura.
