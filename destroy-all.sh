@@ -1,26 +1,30 @@
 #!/bin/sh
 
-# Verificar que la variable de entorno AZ_RESOURCE_GROUP esté definida
+# Verify that the AZ_RESOURCE_GROUP environment variable is defined
 if [ -z "$AZ_RESOURCE_GROUP" ]; then
-    echo "Error: La variable de entorno AZ_RESOURCE_GROUP no está definida."
+    echo "Error: The AZ_RESOURCE_GROUP environment variable is not defined."
     exit 1
 fi
 
-# Confirmar la eliminación del grupo de recursos
-echo "Estás a punto de eliminar el grupo de recursos: $AZ_RESOURCE_GROUP"
-read -p "¿Estás seguro? Esta acción no se puede deshacer. (sí/no): " confirm
+# Confirm the deletion of the resource group
+echo "You are about to delete the resource group: $AZ_RESOURCE_GROUP"
+read -p "Are you sure? This action cannot be undone. (yes/no): " confirm
 
-if [ "$confirm" != "sí" ]; then
-    echo "Operación cancelada."
+# Convert the response to lowercase to facilitate comparison
+confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]')
+
+# Check if the response is a form of "yes"
+if [ "$confirm" != "yes" ] && [ "$confirm" != "y" ] && [ "$confirm" != "sí" ] && [ "$confirm" != "s" ]; then
+    echo "Operation canceled."
     exit 0
 fi
 
-# Destruyendo grupo de recursos
-echo "Destruyendo grupo de recursos: $AZ_RESOURCE_GROUP"
+# Deleting resource group
+echo "Deleting resource group: $AZ_RESOURCE_GROUP"
 
 az group delete \
     --name $AZ_RESOURCE_GROUP \
     --yes \
     --no-wait
 
-echo "Eliminación del grupo de recursos iniciada. Esto puede tardar unos minutos."
+echo "Resource group deletion initiated. This may take a few minutes."
