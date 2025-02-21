@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Verificar que todas las variables de entorno estén definidas
+if [ -z "$AZ_RESOURCE_GROUP" ] || [ -z "$AZ_DATABASE_SERVER_NAME" ] || [ -z "$AZ_DATABASE_NAME" ] || [ -z "$AZ_LOCATION" ] || [ -z "$AZ_SQL_SERVER_USERNAME" ] || [ -z "$AZ_SQL_SERVER_PASSWORD" ] || [ -z "$SPRING_DATASOURCE_URL" ] || [ -z "$SPRING_DATASOURCE_USERNAME" ] || [ -z "$SPRING_DATASOURCE_PASSWORD" ]; then
+    echo "Error: Una o más variables de entorno no están definidas."
+    exit 1
+fi
+
 # Crear plan de App Service
 echo "Creando plan de App Service"
 az appservice plan create --name filmhub-backend-plan --resource-group $AZ_RESOURCE_GROUP --sku B1 --is-linux
@@ -12,6 +18,7 @@ az webapp create --resource-group $AZ_RESOURCE_GROUP --plan filmhub-backend-plan
 echo "Configurando variables de entorno en la aplicación web"
 az webapp config appsettings set --resource-group $AZ_RESOURCE_GROUP --name filmhub-backend --settings \
     AZ_RESOURCE_GROUP=$AZ_RESOURCE_GROUP \
+    AZ_DATABASE_SERVER_NAME=$AZ_DATABASE_SERVER_NAME \
     AZ_DATABASE_NAME=$AZ_DATABASE_NAME \
     AZ_LOCATION=$AZ_LOCATION \
     AZ_SQL_SERVER_USERNAME=$AZ_SQL_SERVER_USERNAME \
