@@ -1,6 +1,7 @@
 package com.udea.filmhub.service;
 
 import com.udea.filmhub.dto.UsuarioDTO;
+import com.udea.filmhub.exceptions.UsuarioNotFoundException;
 import com.udea.filmhub.model.Usuario;
 import com.udea.filmhub.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,21 @@ public class UsuarioService {
 
     public UsuarioDTO getUsuario(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado con id: " + id));
         return convertToDTO(usuario);
     }
 
     public void deleteUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new UsuarioNotFoundException("Usuario no encontrado con id: " + id);
+        }
         usuarioRepository.deleteById(id);
+    }
+
+    public UsuarioDTO getUsuarioByCorreo(String correo) {
+        Usuario usuario = usuarioRepository.findByEmail(correo)
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado con correo: " + correo));
+        return convertToDTO(usuario);
     }
 
     private UsuarioDTO convertToDTO(Usuario usuario) {
@@ -50,11 +60,5 @@ public class UsuarioService {
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setAvatar(usuarioDTO.getAvatar());
         return usuario;
-    }
-
-    public UsuarioDTO getUsuarioByCorreo(String correo) {
-        Usuario usuario = usuarioRepository.findByEmail(correo)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + correo));
-        return convertToDTO(usuario);
     }
 }

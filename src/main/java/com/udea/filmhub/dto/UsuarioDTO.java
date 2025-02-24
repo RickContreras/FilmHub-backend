@@ -1,6 +1,8 @@
 package com.udea.filmhub.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "Detalles de la solicitud para crear un Usuario")
 public class UsuarioDTO {
@@ -8,9 +10,12 @@ public class UsuarioDTO {
     @Schema(description = "ID del usuario", example = "1")
     private Long id;
 
+    @NotBlank(message = "El nombre no puede ser nulo o vacío")
     @Schema(description = "Nombre del usuario", example = "Juan Perez")
     private String nombre;
 
+    @Email(message = "El email debe tener un formato válido")
+    @NotBlank(message = "El email no puede ser nulo o vacío")
     @Schema(description = "Email del usuario", example = "juan.perez@example.com")
     private String email;
 
