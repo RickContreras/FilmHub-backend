@@ -35,11 +35,11 @@ Una aplicación **REST API** robusta creada con **Spring Boot** para gestionar c
 
 Filmhub es una aplicación backend diseñada para ofrecer una experiencia completa en la gestión de contenido audiovisual. Permite a los usuarios:
 
-- Registrarse y gestionar sus perfiles
-- Explorar un catálogo extenso de películas y series
-- Agregar contenido a listas personalizadas
-- Marcar contenido como visto o no visto
-- Recibir recomendaciones personalizadas basadas en sus preferencias
+- Registrarse y gestionar su perfil.
+- Explorar un catálogo extenso de películas y series.
+- Agregar contenido a su biblioteca.
+- Marcar contenido como visto o no visto.
+- Recibir recomendaciones personalizadas basadas en sus preferencias o contenido agregado a su biblioteca.
 
 Esta API RESTful proporciona la base para construir aplicaciones frontend robustas y escalables en el dominio del streaming y la gestión de contenido multimedia.
 
@@ -47,18 +47,19 @@ Esta API RESTful proporciona la base para construir aplicaciones frontend robust
 
 Este proyecto cuenta con una parte frontend desarrollada en **React** que consume esta API. Puedes encontrar el repositorio del frontend en el siguiente enlace:
 
-[FilmHub-Front](https://github.com/eospgonz10/FilmHub-front/tree/main)
+[FilmHub-frontend](https://github.com/eospgonz10/FilmHub-front/tree/main)
 
 El frontend proporciona una interfaz de usuario intuitiva y amigable para interactuar con la API de Filmhub, permitiendo a los usuarios explorar y gestionar contenido audiovisual de manera eficiente.
 
 ### Características del Frontend
 
-- Registro y login de usuario a traves de google.
-- Exploración de un catálogo extenso de películas y series.
+- Registro y login de usuario a través de Google.
+- Manejo de login en toda la página.
+- Exploración de un catálogo extenso de películas y series de api externa y este backend.
 - Creación de listas personalizadas.
-- Recomendaciones personalizadas basadas en las preferencias del usuario o contenido agregado a las listas personalizadas.
+- Recomendaciones personalizadas basadas en las preferencias del usuario o contenido agregado a la lista propia del usuario.
 
-Para más detalles sobre cómo configurar y ejecutar el proyecto frontend, consulta el README del repositorio del frontend.
+Para más detalles sobre cómo configurar y ejecutar el proyecto frontend, consulta el README del repositorio.
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -114,7 +115,7 @@ src/
 ## 📦 Dependencias Principales
 
 - **Spring Boot Starter Web**: Proporciona las bibliotecas necesarias para construir aplicaciones web y RESTful.
-- **Spring Boot Starter Data JPA**: Integración con JPA y Hibernate.
+- **Spring Boot Starter Data JPA**: Integración con JPA e Hibernate.
 - **Microsoft SQL Server JDBC Driver**: Conector para Azure SQL Database.
 - **PostgreSQL Driver**: Conector para PostgreSQL.
 - **Spring Boot Starter Data JDBC**: Proporciona soporte para JDBC, simplificando el acceso a bases de datos relacionales.
@@ -128,8 +129,8 @@ src/
 **Clona el repositorio:**
 
 ```bash
-    git clone https://github.com/RickContreras/FilmHub-backend.git
-    cd FilmHub-backend
+git clone https://github.com/RickContreras/FilmHub-backend.git
+cd FilmHub-backend
 ```
 
 ### Azure SQL Database
@@ -230,7 +231,7 @@ swagger.server.url=https://la-url-de-su-codespace-8080.app.github.dev/api
 
 Además, asegúrese de configurar el puerto 8080 como "Público" y en "http".
 
-* Si esta trabajando con variables de entorno, se tiene que ejecutar las variables de entorno cada vez que se vuelva activar el codespace.
+* Si está trabajando con variables de entorno, se tiene que ejecutar las variables de entorno cada vez que se vuelva activar el codespace.
 ```sh
 source env.sh
 ```
