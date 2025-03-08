@@ -15,6 +15,7 @@ Una aplicación **REST API** robusta creada con **Spring Boot** para gestionar c
 ## 📑 Tabla de Contenidos
 
 - [🚀 Descripción](#-descripción)
+- [🌐 Proyecto Frontend](#-proyecto-frontend)
 - [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
 - [📂 Estructura del Proyecto](#-estructura-del-proyecto)
 - [📦 Dependencias Principales](#-dependencias-principales)
@@ -41,6 +42,23 @@ Filmhub es una aplicación backend diseñada para ofrecer una experiencia comple
 - Recibir recomendaciones personalizadas basadas en sus preferencias
 
 Esta API RESTful proporciona la base para construir aplicaciones frontend robustas y escalables en el dominio del streaming y la gestión de contenido multimedia.
+
+## 🌐 Proyecto Frontend
+
+Este proyecto cuenta con una parte frontend desarrollada en **React** que consume esta API. Puedes encontrar el repositorio del frontend en el siguiente enlace:
+
+[FilmHub-Front](https://github.com/eospgonz10/FilmHub-front/tree/main)
+
+El frontend proporciona una interfaz de usuario intuitiva y amigable para interactuar con la API de Filmhub, permitiendo a los usuarios explorar y gestionar contenido audiovisual de manera eficiente.
+
+### Características del Frontend
+
+- Registro y login de usuario a traves de google.
+- Exploración de un catálogo extenso de películas y series.
+- Creación de listas personalizadas.
+- Recomendaciones personalizadas basadas en las preferencias del usuario o contenido agregado a las listas personalizadas.
+
+Para más detalles sobre cómo configurar y ejecutar el proyecto frontend, consulta el README del repositorio del frontend.
 
 ## 🛠️ Tecnologías Utilizadas
 
