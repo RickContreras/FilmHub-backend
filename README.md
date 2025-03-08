@@ -47,17 +47,17 @@ Esta API RESTful proporciona la base para construir aplicaciones frontend robust
 
 Este proyecto cuenta con una parte frontend desarrollada en **React** que consume esta API. Puedes encontrar el repositorio del frontend en el siguiente enlace:
 
-[FilmHub-frontend](https://github.com/eospgonz10/FilmHub-front/tree/main)
+[![FilmHub-frontend](https://img.shields.io/badge/GitHub-Frontend-blue?logo=github)](https://github.com/eospgonz10/FilmHub-front/tree/main)
 
 El frontend proporciona una interfaz de usuario intuitiva y amigable para interactuar con la API de Filmhub, permitiendo a los usuarios explorar y gestionar contenido audiovisual de manera eficiente.
 
-### Características del Frontend
+### ✨ Características del Frontend
 
-- Registro y login de usuario a través de Google.
-- Manejo de login en toda la página.
-- Exploración de un catálogo extenso de películas y series de api externa y este backend.
-- Creación de listas personalizadas.
-- Recomendaciones personalizadas basadas en las preferencias del usuario o contenido agregado a la lista propia del usuario.
+- 🔑 **Registro y login de usuario a través de Google**
+- 🔒 **Manejo de login en toda la página**
+- 🎬 **Exploración de un catálogo extenso de películas y series de API externa y este backend**
+- 📋 **Creación de listas personalizadas**
+- ⭐ **Recomendaciones personalizadas basadas en las preferencias del usuario o contenido agregado a la lista propia del usuario**
 
 Para más detalles sobre cómo configurar y ejecutar el proyecto frontend, consulta el README del repositorio.
 
