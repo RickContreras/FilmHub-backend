@@ -2,11 +2,16 @@ package com.udea.filmhub.service;
 
 import com.udea.filmhub.dto.UsuarioDTO;
 import com.udea.filmhub.exceptions.UsuarioNotFoundException;
+import com.udea.filmhub.exceptions.ValidationException;
 import com.udea.filmhub.model.Usuario;
 import com.udea.filmhub.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,7 +19,12 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
+    );
+
     public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
+        validateUsuario(usuarioDTO);
         Usuario usuario = convertToEntity(usuarioDTO);
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return convertToDTO(savedUsuario);
@@ -43,6 +53,18 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(correo)
                 .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado con correo: " + correo));
         return convertToDTO(usuario);
+    }
+
+    private void validateUsuario(UsuarioDTO usuarioDTO) {
+        Map<String, String> errors = new HashMap<>();
+
+        if (!EMAIL_PATTERN.matcher(usuarioDTO.getEmail()).matches()) {
+            errors.put("email", "The email field must be a valid email");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
     }
 
     private UsuarioDTO convertToDTO(Usuario usuario) {
